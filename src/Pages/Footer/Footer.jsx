@@ -3,8 +3,8 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 function Footer() {
   return (
     <footer className="bg-slate-800 text-white py-8">
-      <div className="container mx-auto flex flex-wrap justify-between">
-        <div className="w-full sm:w-1/2 md:w-1/4 p-4">
+      <div className="container mx-auto flex flex-wrap justify-center md:justify-between">
+        <div className="w-full sm:w-1/2 md:w-1/4 p-4 text-center">
           <h3 className="text-xl sm:text-2xl font-bold mb-3">Contact Us</h3>
           <p>123 Car Street, Suite 101</p>
           <p>New York, United States</p>
@@ -12,11 +12,13 @@ function Footer() {
           <p>Phone: +1 (123) 456-7890</p>
         </div>
         <div className="text-center">
-          <img
-            src="https://i.ibb.co/vYVFLfj/download1.png" // Add your company logo image path
-            alt="Serfix Logo"
-            className="h-16 mx-auto mb-4"
-          />
+          <div className="">
+            <img
+              src="https://i.ibb.co/vYVFLfj/download1.png" // Add your company logo image path
+              alt="Serfix Logo"
+              className="h-16 mx-auto mb-4 "
+            />
+          </div>
           <p>
             Serfix
             <br />
