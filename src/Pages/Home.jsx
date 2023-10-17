@@ -10,7 +10,9 @@ function Home() {
       <Banar></Banar>
       <SectionTitle title={"FEATURED CAR"}></SectionTitle>
       <BrandCards></BrandCards>
+      <SectionTitle title={"Promo Bonus"} />
       <PromoBonus></PromoBonus>
+      <SectionTitle title={"About Us"} />
       <AboutUs></AboutUs>
     </div>
   );
