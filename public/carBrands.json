@@ -2,27 +2,27 @@
   "carBrands": [
     {
       "brandName": "Toyota",
-      "brandImage": "https://example.com/toyota.png"
+      "brandImage": "https://i.ibb.co/wpr4hSq/pexels-garvin-st-villier-3874337.jpg"
     },
     {
       "brandName": "Ford",
-      "brandImage": "https://example.com/ford.png"
+      "brandImage": "https://i.ibb.co/JddJCCC/pexels-ambady-kolazhikkaran-14061321.jpg"
     },
     {
       "brandName": "Honda",
-      "brandImage": "https://example.com/honda.png"
+      "brandImage": "https://i.ibb.co/B2xHjNq/pexels-vitali-adutskevich-14073070.jpg"
     },
     {
       "brandName": "Chevrolet",
-      "brandImage": "https://example.com/chevrolet.png"
+      "brandImage": "https://i.ibb.co/0y5W6Fp/pexels-abdulwahab-alawadhi-10832347-1.jpg"
     },
     {
       "brandName": "Volkswagen",
-      "brandImage": "https://example.com/volkswagen.png"
+      "brandImage": "https://i.ibb.co/BzV5Fpf/pexels-malte-luk-2969200.jpg"
     },
     {
       "brandName": "Nissan",
-      "brandImage": "https://example.com/nissan.png"
+      "brandImage": "https://i.ibb.co/M5220jy/pexels-mat-sheard-5657442.jpg"
     }
   ]
 }

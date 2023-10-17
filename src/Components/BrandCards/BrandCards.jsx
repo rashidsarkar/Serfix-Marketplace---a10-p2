@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import BrandCard from "../BrandCard/BrandCard";
 
 function BrandCards() {
   const [cardOfBrand, setCardOfBrand] = useState([]);
@@ -17,18 +18,20 @@ function BrandCards() {
     };
     cardofBrandFetch();
   }, []);
+
   console.log(cardOfBrand);
 
+  if (loading) {
+    return <p>Loading...</p>; // Return loading message
+  }
+
   return (
-    <>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <p>card</p>
-        </div>
-      )}
-    </>
+    <div className="grid md:grid-cols-2 lg:grid-cols-3  grid-cols-1">
+      {/* Display your brand cards here */}
+      {cardOfBrand.map((item, idx) => (
+        <BrandCard item={item} key={idx} />
+      ))}
+    </div>
   );
 }
 

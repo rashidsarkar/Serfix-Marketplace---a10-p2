@@ -14,7 +14,7 @@ function Banar() {
       {/* Overlay on the Image */}
       <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white bg-black bg-opacity-50">
         <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+          <h1 className="text-2xl  md:text-6xl lg:text-7xl font-bold">
             FIND YOUR DREAM CAR
           </h1>
           <p className="text-lg md:text-xl">
