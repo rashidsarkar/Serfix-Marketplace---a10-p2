@@ -1,0 +1,28 @@
+{
+  "carBrands": [
+    {
+      "brandName": "Toyota",
+      "brandImage": "https://example.com/toyota.png"
+    },
+    {
+      "brandName": "Ford",
+      "brandImage": "https://example.com/ford.png"
+    },
+    {
+      "brandName": "Honda",
+      "brandImage": "https://example.com/honda.png"
+    },
+    {
+      "brandName": "Chevrolet",
+      "brandImage": "https://example.com/chevrolet.png"
+    },
+    {
+      "brandName": "Volkswagen",
+      "brandImage": "https://example.com/volkswagen.png"
+    },
+    {
+      "brandName": "Nissan",
+      "brandImage": "https://example.com/nissan.png"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 
 function NavBar() {
-  const user = true; // Replace with your actual authentication logic
+  const user = false; // Replace with your actual authentication logic
 
   const navLinks = (
     <>
@@ -53,7 +53,7 @@ function NavBar() {
   );
 
   return (
-    <div className="left-0 right-0 z-50 w-full mx-auto rounded-b-none bg-base-100 navbar ">
+    <div className="left-0 right-0 z-50 w-full mx-auto rounded-b-none bg-slate-400  navbar ">
       <div className="w-full lg:w-[50%] navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
