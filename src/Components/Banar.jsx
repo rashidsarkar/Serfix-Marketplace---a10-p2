@@ -24,7 +24,7 @@ function Banar() {
           {/* Call to Action Button */}
           <Link
             // Replace with the actual URL you want to link to
-            className="mt-4 inline-block px-4 py-2 bg-[#d54242] text-white text-lg font-semibold rounded hover:bg-[#d54242] transition duration-300"
+            className="mt-4 inline-block px-4 py-2 bg-[#d54242] text-white text-lg font-semibold rounded hover:bg-[#FF6347] transition duration-300"
           >
             Explore Now
           </Link>
