@@ -7,7 +7,8 @@ import Login from "../Pages/Account/Login";
 import SignUp from "../Pages/Account/SignUp";
 
 import NotFound from "../Pages/NotFound ";
-
+import AddProduct from "../Pages/AddProduct/AddProduct";
+import MyCart from "../Pages/MyCart/MyCart";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,14 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/addProduct",
+        element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/myCart",
+        element: <MyCart></MyCart>,
       },
 
       {

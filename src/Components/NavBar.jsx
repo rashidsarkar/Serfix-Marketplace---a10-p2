@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 
 function NavBar() {
-  const user = false; // Replace with your actual authentication logic
+  const user = true; // Replace with your actual authentication logic
 
   const navLinks = (
     <>
@@ -12,7 +12,7 @@ function NavBar() {
             isPending
               ? "pending"
               : isActive
-              ? "text-pink-500 font-semibold"
+              ? "text-[#d54242] font-semibold"
               : ""
           }
         >
@@ -21,18 +21,33 @@ function NavBar() {
       </li>
       <li>
         <NavLink
-          to="/about"
+          to="/addProduct"
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
               : isActive
-              ? "text-pink-500 font-semibold"
+              ? "text-[#d54242] font-semibold"
               : ""
           }
         >
-          About Us
+          Add Product
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/myCart"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#d54242] font-semibold"
+              : ""
+          }
+        >
+          My Cart
+        </NavLink>
+      </li>
+
       <li></li>
     </>
   );
@@ -64,7 +79,16 @@ function NavBar() {
             {navLinks}
           </ul>
         </div>
-        <a className="text-xl normal-case btn btn-ghost">daisyUI</a>
+        <div className="md:h-[70px] flex items-center ">
+          {/* black  */}
+          <img
+            src="https://i.ibb.co/yPGT4WM/download.png"
+            className="h-full"
+            alt=""
+          />
+          {/* white  */}
+          {/* <img src="https://i.ibb.co/vYVFLfj/download1.png" alt="" /> */}
+        </div>
       </div>
       <div className="hidden navbar-center lg:flex">
         <ul className="inline-flex flex-row flex-wrap gap-3 p-2 px-1 text-xl font-semibold menuu menuu-horizontal">
@@ -87,16 +111,16 @@ function NavBar() {
             >
               <li>
                 <div className="flex flex-col px-4 py-3 ">
-                  <span className="block text-sm text-pink-600 dark:text-white">
+                  <span className="block text-sm text-[#d54242] dark:text-white">
                     {user.displayName || "Display Name"}
                   </span>
-                  <span className="block text-sm text-pink-400 truncate dark:text-gray-400">
+                  <span className="block text-sm text-[#d54242] truncate dark:text-gray-400">
                     {user.email || "Email"}
                   </span>
                 </div>
               </li>
 
-              <li className="mx-auto text-center text-pink-600">
+              <li className="mx-auto text-center text-[#d54242]">
                 <Link>Logout</Link>
               </li>
             </ul>
@@ -107,7 +131,7 @@ function NavBar() {
             <li>
               <NavLink
                 to="/Login"
-                className="inline-block rounded bg-pink-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-pink-600 hover:shadow-lg focus:bg-pink-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-700 active:shadow-lg dark:shadow-md dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-md"
+                className="inline-block rounded bg-[#d54242] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-[#d54242] hover:shadow-lg focus:bg-[#d54242] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-[#d54242] active:shadow-lg dark:shadow-md dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-md"
               >
                 Login
               </NavLink>
