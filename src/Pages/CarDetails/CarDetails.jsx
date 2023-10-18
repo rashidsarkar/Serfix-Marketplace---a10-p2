@@ -1,28 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Box, Rating, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { CarsContext } from "../../MainLayout/MainLayout";
 
 function CarDetails() {
   const { carID, brandName } = useParams();
-
-  const [carsData, setCarsData] = useState([]);
-
-  const fetchCarsData = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/cars");
-      setCarsData(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCarsData();
-  }, []);
+  const { fetchCarsData, carsData } = useContext(CarsContext);
 
   const filteredData = carsData.find((car) => car._id === carID);
   console.log(filteredData);

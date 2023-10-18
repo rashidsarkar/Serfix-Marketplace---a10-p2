@@ -1,11 +1,14 @@
 import { Box, Rating, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Banar from "../../Components/Banar";
 import axios from "axios";
 import swal from "sweetalert";
+import { CarsContext } from "../../MainLayout/MainLayout";
 
 function AddProduct() {
   const [ratingvalue, setRatingvalue] = useState(2);
+  const { fetchCarsData, carsData } = useContext(CarsContext);
+  console.log(fetchCarsData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +44,7 @@ function AddProduct() {
         if (response.data.insertedId) {
           // Refresh the coffeeData
           // fetchCoffeeData();
+          fetchCarsData();
           swal("Success", "Product added successfully!", "success");
         }
       })

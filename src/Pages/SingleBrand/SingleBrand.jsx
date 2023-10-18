@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,23 +10,13 @@ import { Box, Rating, Typography } from "@mui/material";
 import SectionTitle from "../../Components/SectionTitle";
 import axios from "axios";
 import CarCard from "../CarCard/CarCard";
+import { CarsContext } from "../../MainLayout/MainLayout";
 
 function SingleBrand() {
+  const { fetchCarsData, carsData } = useContext(CarsContext);
+
   const { brandName } = useParams();
-  const [carsData, setCarsData] = useState([]);
 
-  const fetchCarsData = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/cars");
-      setCarsData(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCarsData();
-  }, []);
   // console.log(brandName);
   const filteredData = carsData.filter((car) => car.brand === brandName);
 
