@@ -27,7 +27,8 @@ function SingleBrand() {
   useEffect(() => {
     fetchCarsData();
   }, []);
-  console.log(brandName);
+  // console.log(brandName);
+  const filteredData = carsData.filter((car) => car.brand === brandName);
 
   return (
     <div>
@@ -68,14 +69,15 @@ function SingleBrand() {
           />
         </SwiperSlide>
       </Swiper>
-      <SectionTitle title={`${brandName} Collection`} />
       <div>
+        <SectionTitle title={`${brandName} Collection`} />
+
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
-          {carsData.map((car) => (
+          {filteredData.map((car) => (
             <CarCard car={car} key={car._id}></CarCard>
           ))}
         </div>
-        {carsData.length === 0 && (
+        {filteredData.length === 0 && (
           <div className="text-xl text-center text-gray-600 min-h-[60vh]">
             No products available for this brand at the moment.
           </div>

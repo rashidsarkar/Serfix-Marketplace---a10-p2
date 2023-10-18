@@ -5,7 +5,7 @@ import axios from "axios";
 import swal from "sweetalert";
 
 function AddProduct() {
-  const [Ratingvalue, setRatingvalue] = useState(2);
+  const [ratingvalue, setRatingvalue] = useState(2);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ function AddProduct() {
       type,
       price,
       shortDescription,
-      Ratingvalue,
+      ratingvalue,
     };
 
     axios
@@ -38,9 +38,16 @@ function AddProduct() {
       })
       .then((response) => {
         console.log(response);
+        if (response.data.insertedId) {
+          // Refresh the coffeeData
+          // fetchCoffeeData();
+          swal("Success", "Product added successfully!", "success");
+        }
       })
       .catch((error) => {
         console.log(error);
+        swal("Error", "Failed to add the product.", "error");
+
         // Handle any errors here
       });
 
@@ -141,7 +148,7 @@ function AddProduct() {
                 </Typography>
                 <Rating
                   name="simple-controlled"
-                  value={Ratingvalue}
+                  value={ratingvalue}
                   onChange={(event, newValue) => {
                     setRatingvalue(newValue);
                   }}

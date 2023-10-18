@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         element: <SingleBrand></SingleBrand>,
       },
       {
-        path: "/brand/:brandName/:carDetails",
+        path: "/brand/:brandName/:carID",
         element: <CarDetails></CarDetails>,
       },
 

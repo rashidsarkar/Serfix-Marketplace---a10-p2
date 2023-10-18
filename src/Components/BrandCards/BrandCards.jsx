@@ -19,7 +19,7 @@ function BrandCards() {
     cardofBrandFetch();
   }, []);
 
-  console.log(cardOfBrand);
+  // console.log(cardOfBrand);
 
   if (loading) {
     return <p>Loading...</p>; // Return loading message

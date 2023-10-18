@@ -1,30 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
 import { Box, Rating, Typography } from "@mui/material";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 function CarDetails() {
-  const carDetails = useParams();
-  console.log(carDetails);
+  const { carID, brandName } = useParams();
+
+  const [carsData, setCarsData] = useState([]);
+
+  const fetchCarsData = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/cars");
+      setCarsData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCarsData();
+  }, []);
+
+  const filteredData = carsData.find((car) => car._id === carID);
+  console.log(filteredData);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
     });
   }, []);
-
-  const product = {
-    name: "Product Name",
-    price: "$999.99",
-    short_description: "Product short description goes here.",
-    long_description: "Product long description goes here.",
-    brand: "Brand Name",
-    type: "Type Name",
-    rating: 4,
-  };
 
   const handleAddToCart = () => {
     Swal.fire({
@@ -42,24 +50,33 @@ function CarDetails() {
           <div className="flex flex-wrap">
             <div data-aos="zoom-in" className="w-full md:w-1/2">
               <img
-                src={`https://i.ibb.co/JddJCCC/pexels-ambady-kolazhikkaran-14061321.jpg`}
+                src={filteredData?.image}
                 alt="Product Image"
                 className="w-full rounded-lg"
               />
             </div>
             <div data-aos="zoom-in" className="w-full p-8 md:w-1/2">
-              <h2 className="text-3xl font-semibold">{product.name}</h2>
-              <p className="text-xl font-bold text-pink-600">{product.price}</p>
-              <p className="mt-4 text-gray-700">{product.short_description}</p>
+              <h2 className="text-3xl italic font-semibold">
+                {filteredData?.name}
+              </h2>
+              <p className="text-xl font-bold text-[#d54242]">
+                Price : $ {filteredData?.price}
+              </p>
+
               <p className="mt-4 text-gray-700">
-                <strong>Brand Name:</strong> {product.brand}
+                <strong>Brand Name:</strong> {filteredData?.brand}
               </p>
               <p className="text-gray-700">
-                <strong>Type Name:</strong> {product.type}
+                <strong>Type Name:</strong> {filteredData?.type}
               </p>
               <div className="mt-8">
                 <h3 className="text-2xl font-semibold">Product Details</h3>
-                <p className="mt-4 text-gray-700">{product.long_description}</p>
+                <p className="mt-4 text-gray-700">
+                  {filteredData?.shortDescription?.length > 330
+                    ? filteredData?.shortDescription?.slice(0, 330)
+                    : filteredData?.shortDescription}
+                  ...
+                </p>
               </div>
               <div className="mt-8">
                 <Box
@@ -72,7 +89,10 @@ function CarDetails() {
                   <Typography component="legend" className="">
                     <p className="text-gray-600 text-xl font-medium">Rating</p>
                   </Typography>
-                  <Rating name="simple-controlled" value={product.rating} />
+                  <Rating
+                    name="simple-controlled"
+                    value={+filteredData?.ratingvalue}
+                  />
                 </Box>
               </div>
               <button
