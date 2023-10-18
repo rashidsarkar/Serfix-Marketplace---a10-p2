@@ -13,15 +13,16 @@ function Home() {
         title={`FIND YOUR DREAM CAR`}
         decpt={`Discover the perfect car for your needs.`}
       ></Banar>
-      <SectionTitle title={"Promo Bonus"} />
-      <PromoBonus></PromoBonus>
+
       <SectionTitle title={"FEATURED CAR"}></SectionTitle>
       <BrandCards></BrandCards>
+      <SectionTitle title={"Promo Bonus"} />
+      <PromoBonus></PromoBonus>
+      <SectionTitle title={"About Us"} />
+      <AboutUs></AboutUs>
       <SectionTitle title={"Our Achievements"}></SectionTitle>
 
       <ProductRevew></ProductRevew>
-      <SectionTitle title={"About Us"} />
-      <AboutUs></AboutUs>
     </div>
   );
 }
