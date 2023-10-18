@@ -9,6 +9,7 @@ import NotFound from "../Pages/NotFound ";
 import AddProduct from "../Pages/AddProduct/AddProduct";
 import MyCart from "../Pages/MyCart/MyCart";
 import SingleBrand from "../Pages/SingleBrand/SingleBrand";
+import CarDetails from "../Pages/CarDetails/CarDetails";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/brand/:brandName",
         element: <SingleBrand></SingleBrand>,
+      },
+      {
+        path: "/brand/:brandName/:carDetails",
+        element: <CarDetails></CarDetails>,
       },
 
       {
