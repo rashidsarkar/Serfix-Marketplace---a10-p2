@@ -1,6 +1,7 @@
 import AboutUs from "../Components/AboutUs/AboutUs";
 import Banar from "../Components/Banar";
 import BrandCards from "../Components/BrandCards/BrandCards";
+import ProductRevew from "../Components/ProductRevew/ProductRevew";
 import PromoBonus from "../Components/PromoBonus/PromoBonus";
 import SectionTitle from "../Components/SectionTitle";
 
@@ -14,6 +15,7 @@ function Home() {
       <PromoBonus></PromoBonus>
       <SectionTitle title={"About Us"} />
       <AboutUs></AboutUs>
+      <ProductRevew></ProductRevew>
     </div>
   );
 }

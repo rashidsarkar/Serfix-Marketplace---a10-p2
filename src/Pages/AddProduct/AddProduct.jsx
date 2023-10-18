@@ -1,8 +1,38 @@
-import React from "react";
+import { Box, Rating, Typography } from "@mui/material";
+import React, { useState } from "react";
 
 function AddProduct() {
+  const [Ratingvalue, setRatingvalue] = useState(2);
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const form = new FormData(e.currentTarget);
+
+    // Extract values from the form data
+    const image = form.get("image");
+    const name = form.get("name");
+    const brand = form.get("brand");
+    const type = form.get("type");
+    const price = form.get("price");
+    const shortDescription = form.get("shortDescription");
+    // Get the count of checked rating stars
+
+    // Create an object with the form data
+    const productData = {
+      image,
+      name,
+      brand,
+      type,
+      price,
+      shortDescription,
+      Ratingvalue,
+    };
+    // console.log(rating);
+
+    // You can do something with the productData, like sending it to a server
+    console.log("Form Data Submitted:", productData);
+
+    // Reset the form fields
     e.currentTarget.reset();
   };
   return (
@@ -31,12 +61,12 @@ function AddProduct() {
             name="brand"
             className="w-full border border-gray-300 rounded p-2 select select-bordered"
           >
-            <option value="Radio">Toyota</option>
-            <option value="Radio">Ford</option>
-            <option value="Radio">Honda</option>
-            <option value="Radio">Chevrolet</option>
-            <option value="Radio">Volkswagen</option>
-            <option value="Radio">Nissan</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Ford">Ford</option>
+            <option value="Honda">Honda</option>
+            <option value="Chevrolet">Chevrolet</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Nissan">Nissan</option>
             {/* Add more brand options here */}
           </select>
         </div>
@@ -46,10 +76,10 @@ function AddProduct() {
             name="type"
             className="w-full border border-gray-300 rounded p-2 select select-bordered"
           >
-            <option value="Radio">SUV</option>
-            <option value="Radio">Sports Car</option>
-            <option value="Radio">Off-Road</option>
-            <option value="Radio">Sedan</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="SportsCar">Sports Car</option>
+            <option value="OffRoad">Off-Road</option>
+            <option value="Sedan">Sedan</option>
             {/* Add more type options here */}
           </select>
         </div>
@@ -70,33 +100,20 @@ function AddProduct() {
           />
         </div>
         <div className="mb-4 mx-auto text-center">
-          <div className="rating">
-            <input
-              type="radio"
-              name="rating"
-              className="mask mask-star bg-orange-400"
+          <Box
+            sx={{
+              "& > legend": { mt: 2 },
+            }}
+          >
+            <Typography component="legend">Rating</Typography>
+            <Rating
+              name="simple-controlled"
+              value={Ratingvalue}
+              onChange={(event, newValue) => {
+                setRatingvalue(newValue);
+              }}
             />
-            <input
-              type="radio"
-              name="rating"
-              className="mask mask-star bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating"
-              className="mask mask-star bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating"
-              className="mask mask-star bg-orange-400"
-            />
-            <input
-              type="radio"
-              name="rating"
-              className="mask mask-star bg-orange-400"
-            />
-          </div>
+          </Box>
         </div>
         <div className="text-center">
           <button
