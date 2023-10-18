@@ -6,6 +6,7 @@ import axios from "axios";
 export const CarsContext = createContext(null);
 function MainLayout() {
   const [carsData, setCarsData] = useState([]);
+  const [itemOnCartData, setitemOnCartData] = useState([]);
 
   const fetchCarsData = async () => {
     try {
@@ -15,15 +16,27 @@ function MainLayout() {
       console.error(error);
     }
   };
-
+  const fetchItemOnCartData = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/itemOnCart");
+      setitemOnCartData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     fetchCarsData();
+    fetchItemOnCartData();
   }, []);
+
   const contextInfo = {
     carsData,
     fetchCarsData,
+    fetchItemOnCartData,
+    itemOnCartData,
+    setitemOnCartData,
   };
-
+  // console.log(itemOnCartData);
   return (
     <CarsContext.Provider value={contextInfo}>
       <div className="mx-auto max-w-7xl">

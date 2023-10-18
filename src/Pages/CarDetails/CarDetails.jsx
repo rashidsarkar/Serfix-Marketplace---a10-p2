@@ -9,10 +9,16 @@ import { CarsContext } from "../../MainLayout/MainLayout";
 
 function CarDetails() {
   const { carID, brandName } = useParams();
-  const { fetchCarsData, carsData } = useContext(CarsContext);
+  const {
+    fetchCarsData,
+    carsData,
+    fetchItemOnCartData,
+    setitemOnCartData,
+    itemOnCartData,
+  } = useContext(CarsContext);
 
   const filteredData = carsData.find((car) => car._id === carID);
-  console.log(filteredData);
+  // console.log(filteredData);
 
   useEffect(() => {
     AOS.init({
@@ -20,15 +26,65 @@ function CarDetails() {
       once: true,
     });
   }, []);
+  // console.log(filteredData);
 
-  const handleAddToCart = () => {
-    Swal.fire({
-      icon: "success",
-      title: "Car added to cart",
-      text: "The car has been added to the cart.",
-      showConfirmButton: true,
-    });
+  const itemToCart = {
+    brand: filteredData?.brand,
+    image: filteredData?.image,
+    name: filteredData?.name,
+    price: filteredData?.price,
+    ratingvalue: filteredData?.ratingvalue,
+    shortDescription: filteredData?.shortDescription,
+    type: filteredData?.type,
   };
+  // console.log(filteredData);
+  // console.log(itemToCart);
+  const handleAddToCart = () => {
+    // const carInCart = itemOnCartData.find(
+    //   (item) => item.name === itemToCart.name
+    // );
+    // if (carInCart) {
+    //   // Show a SweetAlert to inform the user
+    //   Swal.fire({
+    //     icon: "info",
+    //     title: "Car Already in Cart",
+    //     text: "This car is already in your cart.",
+    //     showConfirmButton: true,
+    //   });
+    // } else {
+    axios
+      .post("http://localhost:5000/itemOnCart", itemToCart, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.data.insertedId) {
+          // Refresh the coffeeData
+          // fetchCoffeeData();
+          // fetchCarsData();
+          fetchCarsData();
+          fetchItemOnCartData();
+          console.log(response.data);
+          Swal.fire({
+            icon: "success",
+            title: "Car added to cart",
+            text: "The car has been added to the cart.",
+            showConfirmButton: true,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        // Handle any errors here
+      });
+  };
+  // Swal.fire({
+  //   icon: "success",
+  //   title: "Car added to cart",
+  //   text: "The car has been added to the cart.",
+  //   showConfirmButton: true,
+  // });
 
   return (
     <div>

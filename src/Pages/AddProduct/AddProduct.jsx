@@ -7,7 +7,8 @@ import { CarsContext } from "../../MainLayout/MainLayout";
 
 function AddProduct() {
   const [ratingvalue, setRatingvalue] = useState(2);
-  const { fetchCarsData, carsData } = useContext(CarsContext);
+  const { fetchCarsData, carsData, fetchItemOnCartData } =
+    useContext(CarsContext);
   console.log(fetchCarsData);
 
   const handleSubmit = (e) => {
@@ -45,6 +46,8 @@ function AddProduct() {
           // Refresh the coffeeData
           // fetchCoffeeData();
           fetchCarsData();
+          fetchItemOnCartData();
+
           swal("Success", "Product added successfully!", "success");
         }
       })

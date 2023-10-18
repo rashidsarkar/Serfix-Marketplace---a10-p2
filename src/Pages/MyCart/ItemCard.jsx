@@ -1,9 +1,51 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Paper, Typography, Button, Rating, Box } from "@mui/material";
+import { CarsContext } from "../../MainLayout/MainLayout";
+import swal from "sweetalert";
+import axios from "axios";
 
-const ItemCard = ({ item, onDelete }) => {
-  const { image, name, brand, type, price, shortDescription, Ratingvalue } =
-    item;
+const ItemCard = ({ item }) => {
+  const { fetchCarsData, carsData, fetchItemOnCartData, itemOnCartData } =
+    useContext(CarsContext);
+
+  const {
+    image,
+    name,
+    brand,
+    type,
+    price,
+    shortDescription,
+    _id,
+    Ratingvalue,
+  } = item;
+  // console.log(typeof +_id);
+  const handleDelete = (itemId) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Car!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((res) => {
+      if (res) {
+        axios
+          .delete(`http://localhost:5000/itemOnCart/${itemId}`)
+          .then((res) => {
+            console.log(res.data);
+
+            fetchItemOnCartData();
+
+            swal("Success", "Car deleted successfully!", "success");
+          })
+          .catch((err) => {
+            console.log(err);
+            swal("Error", "An error occurred while deleting the Car.", "error");
+          });
+      } else {
+        swal("Car is safe!");
+      }
+    });
+  };
 
   return (
     <Paper elevation={3} className="my-4 p-4">
@@ -53,7 +95,10 @@ const ItemCard = ({ item, onDelete }) => {
               : shortDescription}
             ...
           </p>
-          <button className="mt-5 inline-block rounded bg-[#d54242] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-[#FF6347] hover:shadow-lg focus:bg-[#d54242] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-[#d54242] active:shadow-lg dark:shadow-md dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-md">
+          <button
+            onClick={() => handleDelete(_id)}
+            className="mt-5 inline-block rounded bg-[#d54242] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-[#FF6347] hover:shadow-lg focus:bg-[#d54242] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-[#d54242] active:shadow-lg dark:shadow-md dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-md"
+          >
             Delete
           </button>
         </div>

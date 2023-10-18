@@ -4,14 +4,12 @@ import { useContext } from "react";
 import { CarsContext } from "../../MainLayout/MainLayout";
 import ItemCard from "./ItemCard";
 import SectionTitle from "../../Components/SectionTitle";
+import swal from "sweetalert";
+import axios from "axios";
 
 function MyCart() {
-  const { fetchCarsData, carsData } = useContext(CarsContext);
-  // const contex = useContext(CarsContext);
-  const handleDelete = (itemId) => {
-    // Implement your delete logic here
-    // You can use this function to remove items from the cart
-  };
+  const { fetchCarsData, carsData, fetchItemOnCartData, itemOnCartData } =
+    useContext(CarsContext);
 
   return (
     <div>
@@ -23,13 +21,9 @@ function MyCart() {
       <div>
         <SectionTitle title={"Browse Your Selection"}></SectionTitle>
 
-        {carsData.map((item) => (
+        {itemOnCartData.map((item) => (
           // <Card key={item.id} item={item} onDelete={handleDelete} />
-          <ItemCard
-            key={item.id}
-            item={item}
-            onDelete={handleDelete}
-          ></ItemCard>
+          <ItemCard key={item._id} item={item}></ItemCard>
         ))}
       </div>
     </div>
