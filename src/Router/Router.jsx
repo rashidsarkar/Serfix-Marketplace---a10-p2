@@ -10,6 +10,7 @@ import AddProduct from "../Pages/AddProduct/AddProduct";
 import MyCart from "../Pages/MyCart/MyCart";
 import SingleBrand from "../Pages/SingleBrand/SingleBrand";
 import CarDetails from "../Pages/CarDetails/CarDetails";
+import UpDateProduct from "../Pages/UpDateProduct/UpDateProduct";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/brand/:brandName/:carID",
         element: <CarDetails></CarDetails>,
+      },
+      {
+        path: "/upDateProduct/:id",
+        element: <UpDateProduct></UpDateProduct>,
       },
 
       {

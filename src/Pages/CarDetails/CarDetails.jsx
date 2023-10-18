@@ -53,7 +53,7 @@ function CarDetails() {
     //   });
     // } else {
     axios
-      .post("http://localhost:5000/itemOnCart", itemToCart, {
+      .post("https://car-web-server-three.vercel.app/itemOnCart", itemToCart, {
         headers: {
           "Content-Type": "application/json",
         },

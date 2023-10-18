@@ -35,7 +35,7 @@ function AddProduct() {
     };
 
     axios
-      .post("http://localhost:5000/cars", productData, {
+      .post("https://car-web-server-three.vercel.app/cars", productData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -85,14 +85,6 @@ function AddProduct() {
           <h1 className="text-2xl font-bold mb-4 text-white">Add Product</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-200">Image:</label>
-              <input
-                type="text"
-                name="image"
-                className="w-full border border-gray-300 rounded p-2"
-              />
-            </div>
-            <div className="mb-4">
               <label className="block text-gray-200">Name:</label>
               <input
                 type="text"
@@ -100,6 +92,15 @@ function AddProduct() {
                 className="w-full border border-gray-300 rounded p-2"
               />
             </div>
+            <div className="mb-4">
+              <label className="block text-gray-200">Image:</label>
+              <input
+                type="text"
+                name="image"
+                className="w-full border border-gray-300 rounded p-2"
+              />
+            </div>
+
             <div className="mb-4">
               <label className="block text-gray-200">Brand Name:</label>
               <select

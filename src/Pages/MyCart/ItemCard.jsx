@@ -29,7 +29,9 @@ const ItemCard = ({ item }) => {
     }).then((res) => {
       if (res) {
         axios
-          .delete(`http://localhost:5000/itemOnCart/${itemId}`)
+          .delete(
+            `https://car-web-server-three.vercel.app/itemOnCart/${itemId}`
+          )
           .then((res) => {
             console.log(res.data);
 
