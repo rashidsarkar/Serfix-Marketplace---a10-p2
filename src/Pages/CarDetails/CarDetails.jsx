@@ -1,11 +1,13 @@
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { Box, Rating, Typography } from "@mui/material";
+import Swal from "sweetalert2";
 
 function CarDetails() {
-  const { carDetails } = useParams();
+  const carDetails = useParams();
   console.log(carDetails);
   useEffect(() => {
     AOS.init({
@@ -24,9 +26,17 @@ function CarDetails() {
     rating: 4,
   };
 
+  const handleAddToCart = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Car added to cart",
+      text: "The car has been added to the cart.",
+      showConfirmButton: true,
+    });
+  };
+
   return (
     <div>
-      <p>Car details of {carDetails}</p>
       <div className="py-10 pt-[50px]">
         <div className="container mx-auto">
           <div className="flex flex-wrap">
@@ -65,7 +75,10 @@ function CarDetails() {
                   <Rating name="simple-controlled" value={product.rating} />
                 </Box>
               </div>
-              <button className="mt-8 bg-[#d54242] hover:bg-[#FF6347] text-white py-2 px-4 rounded-lg">
+              <button
+                className="mt-8 bg-[#d54242] hover-bg-[#FF6347] text-white py-2 px-4 rounded-lg"
+                onClick={handleAddToCart}
+              >
                 Add to Cart
               </button>
             </div>

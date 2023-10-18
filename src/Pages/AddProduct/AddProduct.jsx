@@ -1,6 +1,8 @@
 import { Box, Rating, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Banar from "../../Components/Banar";
+import axios from "axios";
+import swal from "sweetalert";
 
 function AddProduct() {
   const [Ratingvalue, setRatingvalue] = useState(2);
@@ -28,8 +30,21 @@ function AddProduct() {
       Ratingvalue,
     };
 
+    axios
+      .post("http://localhost:5000/cars", productData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        // Handle any errors here
+      });
+
     // You can do something with the productData, like sending it to a server
-    console.log("Form Data Submitted:", productData);
 
     // Reset the form fields
     e.currentTarget.reset();
