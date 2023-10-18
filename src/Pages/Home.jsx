@@ -8,14 +8,20 @@ import SectionTitle from "../Components/SectionTitle";
 function Home() {
   return (
     <div className="min-h-screen">
-      <Banar></Banar>
-      <SectionTitle title={"FEATURED CAR"}></SectionTitle>
-      <BrandCards></BrandCards>
+      <Banar
+        image={`https://i.ibb.co/MfHwY3H/pexels-lloyd-freeman-1429775-1.jpg`}
+        title={`FIND YOUR DREAM CAR`}
+        decpt={`Discover the perfect car for your needs.`}
+      ></Banar>
       <SectionTitle title={"Promo Bonus"} />
       <PromoBonus></PromoBonus>
+      <SectionTitle title={"FEATURED CAR"}></SectionTitle>
+      <BrandCards></BrandCards>
+      <SectionTitle title={"Our Achievements"}></SectionTitle>
+
+      <ProductRevew></ProductRevew>
       <SectionTitle title={"About Us"} />
       <AboutUs></AboutUs>
-      <ProductRevew></ProductRevew>
     </div>
   );
 }
