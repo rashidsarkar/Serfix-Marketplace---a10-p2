@@ -8,6 +8,7 @@ import SignUp from "../Pages/Account/SignUp";
 import NotFound from "../Pages/NotFound ";
 import AddProduct from "../Pages/AddProduct/AddProduct";
 import MyCart from "../Pages/MyCart/MyCart";
+import SingleBrand from "../Pages/SingleBrand/SingleBrand";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/myCart",
         element: <MyCart></MyCart>,
+      },
+      {
+        path: "/brand/:brandName",
+        element: <SingleBrand></SingleBrand>,
       },
 
       {
