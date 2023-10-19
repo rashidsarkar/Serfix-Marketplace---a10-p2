@@ -89,7 +89,7 @@ function SingleBrand() {
           ))}
         </div>
         {carsData.length === 0 && (
-          <div className="text-xl text-center text-gray-600 min-h-[60vh]">
+          <div className="text-xl text-center  min-h-[60vh]">
             No products available for this brand at the moment.
           </div>
         )}
