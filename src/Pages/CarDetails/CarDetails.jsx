@@ -25,7 +25,9 @@ function CarDetails() {
   useEffect(() => {
     const fetchCarsData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/cars/${carID}`);
+        const response = await axios.get(
+          `https://car-web-server-three.vercel.app/cars/${carID}`
+        );
         setCarsData(response.data);
         console.log(response.data);
       } catch (error) {
@@ -57,7 +59,7 @@ function CarDetails() {
 
   const handleAddToCart = () => {
     axios
-      .post("http://localhost:5000/itemOnCart", itemToCart, {
+      .post("https://car-web-server-three.vercel.app/itemOnCart", itemToCart, {
         headers: {
           "Content-Type": "application/json",
         },
