@@ -22,43 +22,45 @@ function SingleBrand() {
 
   return (
     <div>
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={30}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        navigation={true}
-        modules={[Pagination, Autoplay, Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <img
-            src="https://i.ibb.co/mNSypLZ/summer.jpg"
-            className="md:h-[600px] mx-auto"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://i.ibb.co/yBBWnTw/offer3.jpg"
-            className="md:h-[600px] mx-auto"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://i.ibb.co/RSNZZhn/preorder2.webp"
-            className="md:h-[600px] mx-auto"
-            alt=""
-          />
-        </SwiperSlide>
-      </Swiper>
+      <div className="z-[-11]">
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={30}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          navigation={true}
+          modules={[Pagination, Autoplay, Navigation]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <img
+              src="https://i.ibb.co/mNSypLZ/summer.jpg"
+              className="md:h-[600px] mx-auto"
+              alt=""
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="https://i.ibb.co/yBBWnTw/offer3.jpg"
+              className="md:h-[600px] mx-auto"
+              alt=""
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="https://i.ibb.co/RSNZZhn/preorder2.webp"
+              className="md:h-[600px] mx-auto"
+              alt=""
+            />
+          </SwiperSlide>
+        </Swiper>
+      </div>
       <div>
         <SectionTitle title={`${brandName} Collection`} />
 

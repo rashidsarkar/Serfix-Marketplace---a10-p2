@@ -10,19 +10,41 @@ function UpDateProduct() {
   const [loading, setLoading] = useState(false);
   const { fetchCarsData, carsData, fetchItemOnCartData } =
     useContext(CarsContext);
-  const [ratingvalue, setRatingvalue] = useState(0);
+  // const [ratingvalue, setRatingvalue] = useState(0);
+
+  const handleRatingChange = (event, newValue) => {
+    setRating(newValue);
+  };
+
   const filteredDatas = carsData.filter((car) => car._id === id);
 
   // console.log(filteredData[0]);
   const filteredData = filteredDatas[0];
+  // console.log("ok", filteredData);
+
+  const [selectedOption, setSelectedOption] = useState(filteredData?.brand);
+  // const [selectedOption, setSelectedOption] = useState(filteredData?.brand);
+
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   const ratingValue = filteredData?.ratingvalue;
+
+  const [rating, setRating] = useState(ratingValue);
+  console.log(filteredData);
+
   // console.log(filteredData?.ratingvalue);
-  console.log(filteredData?.brand);
+  // console.log(filteredData?.brand);
+  console.log("yesy", rating, ratingValue);
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     const form = new FormData(e.currentTarget);
+    const form2 = e.target;
+    // const selectData = new FormData(e.target);
+    // const brand2 = form2.brand.value;
+    // const brand = selectData.get("brand");
 
     // Extract values from the form data
     const image = form.get("image");
@@ -41,7 +63,7 @@ function UpDateProduct() {
       type,
       price,
       shortDescription,
-      ratingvalue,
+      rating,
     };
 
     axios
@@ -103,14 +125,18 @@ function UpDateProduct() {
             <select
               name="brand"
               className="w-full border border-gray-300 rounded p-2 select select-bordered"
+              // defaultValue={brand}
+              // onChange={handleSelectChange}
+              // value={selectedOption}
               defaultValue={filteredData?.brand}
             >
+              {/* <option value="selectedOption">{selectedOption}</option> */}
               <option value="Toyota">Toyota</option>
               <option value="Ford">Ford</option>
               <option value="Honda">Honda</option>
               <option value="Chevrolet">Chevrolet</option>
               <option value="Volkswagen">Volkswagen</option>
-              <option value="Nissan">Nissan</option>
+              <option value="Nissan">Nissan</option> */
               {/* Add more brand options here */}
             </select>
           </div>
@@ -154,13 +180,19 @@ function UpDateProduct() {
               <Typography component="legend" className="text-white">
                 Rating
               </Typography>
-              <Rating
+              {/* <Rating
                 name="simple-controlled"
                 value={ratingvalue}
                 defaultValue={Number(ratingValue)}
                 onChange={(event, newValue) => {
                   setRatingvalue(newValue);
                 }}
+              />  */}
+              <Rating
+                name="rating"
+                defaultValue={ratingValue}
+                value={rating}
+                onChange={handleRatingChange}
               />
             </Box>
           </div>

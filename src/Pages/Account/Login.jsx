@@ -1,14 +1,51 @@
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { SiGoogle } from "react-icons/si";
+import { AuthContext } from "../../FireBase/AuthProvider";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const { loginEmPAss, googleSing, user } = useContext(AuthContext);
+  const navigat = useNavigate();
+  const preveLocation = useLocation();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const form = new FormData(event.currentTarget);
+    const email = form.get("email");
+    const password = form.get("password");
+    loginEmPAss(email, password)
+      .then((user) => {
+        swal("Success", "Login successful!", "success");
+        navigat(preveLocation?.state || "/");
+        console.log(user.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        swal("Error", error.message, "error");
+      });
+  };
+  const handleGoogleSignIn = () => {
+    googleSing()
+      .then((user) => {
+        swal("Success", "Login successful!", "success");
+        navigat(preveLocation?.state || "/");
+        console.log(user.user, 1);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="p-8 text-white bg-gray-800 rounded-lg shadow-md w-96">
         <h2 className="text-3xl font-semibold text-center mb-4 text-[#FF444A]">
           Login
         </h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -49,12 +86,15 @@ function Login() {
         <p className="mt-4 text-center text-gray-300">
           <span className="text-sm text-gray-400">or</span>
         </p>
-        <button className="mt-4 w-full bg-[#4285F4] text-white py-3 px-4 rounded-md hover:bg-[#357AE8] transition duration-300 flex items-center justify-center">
+        <button
+          onClick={handleGoogleSignIn}
+          className="mt-4 w-full bg-[#4285F4] text-white py-3 px-4 rounded-md hover:bg-[#357AE8] transition duration-300 flex items-center justify-center"
+        >
           <SiGoogle className="w-6 h-6 mr-2" />
           Sign In with Google
         </button>
         <p className="mt-4 text-center text-gray-300">
-          Don&apos;t have an account?{" "}
+          Don't have an account?{" "}
           <Link to="/signup" className="text-[#FF444A] hover:underline">
             Sign Up
           </Link>

@@ -11,6 +11,7 @@ import MyCart from "../Pages/MyCart/MyCart";
 import SingleBrand from "../Pages/SingleBrand/SingleBrand";
 import CarDetails from "../Pages/CarDetails/CarDetails";
 import UpDateProduct from "../Pages/UpDateProduct/UpDateProduct";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,11 +26,21 @@ const router = createBrowserRouter([
 
       {
         path: "/addProduct",
-        element: <AddProduct></AddProduct>,
+        element: (
+          <PrivateRoute>
+            <AddProduct></AddProduct>
+          </PrivateRoute>
+        ),
+        // element: ,
       },
       {
         path: "/myCart",
-        element: <MyCart></MyCart>,
+        // element:
+        element: (
+          <PrivateRoute>
+            <MyCart></MyCart>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/brand/:brandName",
@@ -37,11 +48,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/brand/:brandName/:carID",
-        element: <CarDetails></CarDetails>,
+
+        element: (
+          <PrivateRoute>
+            <CarDetails></CarDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/upDateProduct/:id",
-        element: <UpDateProduct></UpDateProduct>,
+        // element: <UpDateProduct></UpDateProduct>,
+        element: (
+          <PrivateRoute>
+            <UpDateProduct></UpDateProduct>
+          </PrivateRoute>
+        ),
       },
 
       {

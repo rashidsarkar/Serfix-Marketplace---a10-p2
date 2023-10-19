@@ -1,7 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../FireBase/AuthProvider";
+import { useContext } from "react";
 
 function NavBar() {
-  const user = false; // Replace with your actual authentication logic
+  const { user, logOut } = useContext(AuthContext);
+
+  // const user = false; // Replace with your actual authentication logic
+  const handleSingOut = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  };
+  console.log(user);
 
   const navLinks = (
     <>
@@ -55,7 +70,7 @@ function NavBar() {
   return (
     <div className="left-0 right-0 z-50 w-full mx-auto rounded-b-none bg-slate-400  navbar ">
       <div className="w-full lg:w-[50%] navbar-start">
-        <div className="dropdown">
+        <div className="dropdown z-50">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -99,15 +114,15 @@ function NavBar() {
       <div className="navbar-end">
         {user ? (
           // User is authenticated, show user menu
-          <div className="dropdown dropdown-end">
+          <div className="dropdown z-50  dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={user.photoURL || "photoURL"} />
+                <img src={user?.photoURL} />
               </div>
             </label>
             <ul
               tabIndex={0}
-              className="mt-3 w-[250px] z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box "
+              className="mt-3 w-[250px]  z-[99] p-2 shadow menu menu-sm  dropdown-content bg-base-100 rounded-box "
             >
               <li>
                 <div className="flex flex-col px-4 py-3 ">
@@ -121,7 +136,7 @@ function NavBar() {
               </li>
 
               <li className="mx-auto text-center text-[#d54242]">
-                <Link>Logout</Link>
+                <Link onClick={handleSingOut}>Logout</Link>
               </li>
             </ul>
           </div>
