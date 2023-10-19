@@ -10,41 +10,27 @@ function UpDateProduct() {
   const [loading, setLoading] = useState(false);
   const { fetchCarsData, carsData, fetchItemOnCartData } =
     useContext(CarsContext);
-  // const [ratingvalue, setRatingvalue] = useState(0);
-
-  const handleRatingChange = (event, newValue) => {
-    setRating(newValue);
-  };
-
   const filteredDatas = carsData.filter((car) => car._id === id);
 
-  // console.log(filteredData[0]);
   const filteredData = filteredDatas[0];
-  // console.log("ok", filteredData);
+
+  const ratingValuesOld = filteredData?.ratingvalue;
+
+  const [ratingvalue, setRatingvalue] = useState(ratingValuesOld);
 
   const [selectedOption, setSelectedOption] = useState(filteredData?.brand);
-  // const [selectedOption, setSelectedOption] = useState(filteredData?.brand);
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
-  const ratingValue = filteredData?.ratingvalue;
-
-  const [rating, setRating] = useState(ratingValue);
   console.log(filteredData);
+  console.log("rating Value ", ratingvalue);
 
-  // console.log(filteredData?.ratingvalue);
-  // console.log(filteredData?.brand);
-  console.log("yesy", rating, ratingValue);
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     const form = new FormData(e.currentTarget);
-    const form2 = e.target;
-    // const selectData = new FormData(e.target);
-    // const brand2 = form2.brand.value;
-    // const brand = selectData.get("brand");
 
     // Extract values from the form data
     const image = form.get("image");
@@ -63,7 +49,7 @@ function UpDateProduct() {
       type,
       price,
       shortDescription,
-      rating,
+      ratingvalue,
     };
 
     axios
@@ -180,20 +166,20 @@ function UpDateProduct() {
               <Typography component="legend" className="text-white">
                 Rating
               </Typography>
-              {/* <Rating
+              <Rating
                 name="simple-controlled"
                 value={ratingvalue}
-                defaultValue={Number(ratingValue)}
+                defaultValue={Number(ratingvalue)}
                 onChange={(event, newValue) => {
                   setRatingvalue(newValue);
                 }}
-              />  */}
-              <Rating
+              />
+              {/* <Rating
                 name="rating"
                 defaultValue={ratingValue}
                 value={rating}
                 onChange={handleRatingChange}
-              />
+              /> */}
             </Box>
           </div>
           <div className="text-center">
