@@ -9,7 +9,7 @@ function CarCard({ car }) {
   // console.log(name);
   return (
     <div>
-      <div className="card card-compact my-10 lg:w-96 w-[300px] mx-auto bg-base-300 shadow-xl lg:h-[474px]">
+      <div className="card card-compact my-10 lg:w-96 w-[300px] mx-auto bg-base-300 shadow-xl md:h-[474px]">
         <figure className="h-[215px]">
           <img src={car?.image} alt={car?.name} className=" rounded-t-lg" />
         </figure>
