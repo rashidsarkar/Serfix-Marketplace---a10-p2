@@ -1,72 +1,67 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Rating, Typography } from "@mui/material";
 import axios from "axios";
 import swal from "sweetalert";
 import { CarsContext } from "../../MainLayout/MainLayout";
 import { useParams } from "react-router-dom";
 
-function UpDateProduct() {
+function UpdateProduct() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
-  const { fetchCarsData, carsData, fetchItemOnCartData } =
-    useContext(CarsContext);
-  const filteredDatas = carsData.filter((car) => car._id === id);
+  const { fetchCarsData, fetchItemOnCartData } = useContext(CarsContext);
 
-  const filteredData = filteredDatas[0];
+  // State to hold the form data
+  const [formData, setFormData] = useState({
+    name: "",
+    image: "",
+    brand: "",
+    type: "",
+    price: "",
+    shortDescription: "",
+    ratingvalue: 0,
+  });
 
-  const ratingValuesOld = filteredData?.ratingvalue;
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/cars/${id}`);
+        setFormData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const [ratingvalue, setRatingvalue] = useState(ratingValuesOld);
-
-  const [selectedOption, setSelectedOption] = useState(filteredData?.brand);
+    fetchProductData(); // Fetch the specific product data
+  }, [id]);
 
   const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  console.log(filteredData);
-  console.log("rating Value ", ratingvalue);
+  // Handle rating value change
+  const handleRatingChange = (event, newValue) => {
+    setFormData({
+      ...formData,
+      ratingvalue: newValue,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    const form = new FormData(e.currentTarget);
-
-    // Extract values from the form data
-    const image = form.get("image");
-    const name = form.get("name");
-    const brand = form.get("brand");
-    const type = form.get("type");
-    const price = form.get("price");
-    const shortDescription = form.get("shortDescription");
-
-    // Create an object with the updated data
-    const updatedProductData = {
-      // Include existing data
-      image,
-      name,
-      brand,
-      type,
-      price,
-      shortDescription,
-      ratingvalue,
-    };
 
     axios
-      .put(
-        `http://localhost:5000/cars/${filteredData?._id}`,
-        updatedProductData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .put(`http://localhost:5000/cars/${id}`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
-        console.log(response);
-
         if (response.data.modifiedCount) {
-          // fetchCarsData();
           swal("Success", "Product updated successfully!", "success");
           fetchCarsData();
           fetchItemOnCartData();
@@ -76,9 +71,6 @@ function UpDateProduct() {
         console.log(error);
         swal("Error", "Failed to update the product.", "error");
       });
-
-    // Reset the form fields
-    // e.currentTarget.reset();
   };
 
   return (
@@ -93,7 +85,8 @@ function UpDateProduct() {
               type="text"
               name="name"
               className="w-full border border-gray-300 rounded p-2"
-              defaultValue={filteredData?.name}
+              value={formData.name}
+              onChange={handleSelectChange}
             />
           </div>
           <div className="mb-4">
@@ -102,7 +95,8 @@ function UpDateProduct() {
               type="text"
               name="image"
               className="w-full border border-gray-300 rounded p-2"
-              defaultValue={filteredData?.image}
+              value={formData.image}
+              onChange={handleSelectChange}
             />
           </div>
 
@@ -111,18 +105,15 @@ function UpDateProduct() {
             <select
               name="brand"
               className="w-full border border-gray-300 rounded p-2 select select-bordered"
-              // defaultValue={brand}
-              // onChange={handleSelectChange}
-              // value={selectedOption}
-              defaultValue={filteredData?.brand}
+              value={formData.brand}
+              onChange={handleSelectChange}
             >
-              {/* <option value="selectedOption">{selectedOption}</option> */}
               <option value="Toyota">Toyota</option>
               <option value="Ford">Ford</option>
               <option value="Honda">Honda</option>
               <option value="Chevrolet">Chevrolet</option>
               <option value="Volkswagen">Volkswagen</option>
-              <option value="Nissan">Nissan</option> */
+              <option value="Nissan">Nissan</option>
               {/* Add more brand options here */}
             </select>
           </div>
@@ -131,7 +122,8 @@ function UpDateProduct() {
             <select
               name="type"
               className="w-full border border-gray-300 rounded p-2 select select-bordered"
-              defaultValue={filteredData?.type}
+              value={formData.type}
+              onChange={handleSelectChange}
             >
               <option value="Hybrid">Hybrid</option>
               <option value="SportsCar">Sports Car</option>
@@ -146,7 +138,8 @@ function UpDateProduct() {
               type="text"
               name="price"
               className="w-full border border-gray-300 rounded p-2"
-              defaultValue={filteredData?.price}
+              value={formData.price}
+              onChange={handleSelectChange}
             />
           </div>
           <div className="mb-4">
@@ -154,7 +147,8 @@ function UpDateProduct() {
             <textarea
               name="shortDescription"
               className="w-full border border-gray-300 rounded p-2"
-              defaultValue={filteredData?.shortDescription}
+              value={formData.shortDescription}
+              onChange={handleSelectChange}
             />
           </div>
           <div className="mb-4 mx-auto text-center">
@@ -168,18 +162,9 @@ function UpDateProduct() {
               </Typography>
               <Rating
                 name="simple-controlled"
-                value={ratingvalue}
-                defaultValue={Number(ratingvalue)}
-                onChange={(event, newValue) => {
-                  setRatingvalue(newValue);
-                }}
-              />
-              {/* <Rating
-                name="rating"
-                defaultValue={ratingValue}
-                value={rating}
+                value={formData.ratingvalue}
                 onChange={handleRatingChange}
-              /> */}
+              />
             </Box>
           </div>
           <div className="text-center">
@@ -196,4 +181,4 @@ function UpDateProduct() {
   );
 }
 
-export default UpDateProduct;
+export default UpdateProduct;
