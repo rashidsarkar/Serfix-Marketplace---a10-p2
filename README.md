@@ -8,17 +8,17 @@ Welcome to Serfix, your one-stop destination for buying and selling cars. With a
 
 Serfix is more than just an automotive website; it's a comprehensive solution for car enthusiasts, buyers, sellers, and service providers. Here are the key features of our website:
 
-1. **Buy and Sell Cars**: Users can effortlessly browse through a diverse inventory of cars, from luxury to economy. Sellers can list their vehicles, and buyers can make informed decisions based on detailed listings and user reviews.
+- **Buy and Sell Cars**: Users can effortlessly browse through a diverse inventory of cars, from luxury to economy. Sellers can list their vehicles, and buyers can make informed decisions based on detailed listings and user reviews.
 
-2. **User Authentication**: Our website offers a secure login and signup system, enabling users to create accounts and personalize their experience. Registered users can save their favorite cars and track their listings.
+- **User Authentication**: Our website offers a secure login and signup system, enabling users to create accounts and personalize their experience. Registered users can save their favorite cars and track their listings.
 
-3. **Add Your Product**: In addition to buying and selling cars, Serfix allows users to add their own listings. Whether you're a dealer or an individual, you can showcase your cars to a broad audience.
+- **Add Your Product**: In addition to buying and selling cars, Serfix allows users to add their own listings. Whether you're a dealer or an individual, you can showcase your cars to a broad audience.
 
-4. **My Cart Page**: Shoppers can conveniently view the cars they've added to their cart, review details, and proceed with their purchase. Serfix ensures a smooth and hassle-free checkout process.
+- **My Cart Page**: Shoppers can conveniently view the cars they've added to their cart, review details, and proceed with their purchase. Serfix ensures a smooth and hassle-free checkout process.
 
-5. **User Reviews and Ratings**: Transparency is our priority. Users can read and leave reviews about car listings and sellers. These reviews help build trust and provide valuable insights into the quality and reliability of cars and sellers.
+- **User Reviews and Ratings**: Transparency is our priority. Users can read and leave reviews about car listings and sellers. These reviews help build trust and provide valuable insights into the quality and reliability of cars and sellers.
 
-6. **Responsive Design**: Serfix is designed with a responsive and user-friendly interface, making it accessible from various devices, ensuring an optimal user experience.
+- **Responsive Design**: Serfix is designed with a responsive and user-friendly interface, making it accessible from various devices, ensuring an optimal user experience.
 
 ## Functionalities
 
