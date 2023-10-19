@@ -154,16 +154,7 @@ function UpdateProduct() {
               onChange={handleSelectChange}
             />
           </div>
-          <div className="mb-4">
-            <label className="block ">Short Description:</label>
-            <textarea
-              required
-              name="shortDescription"
-              className="w-full border border-gray-300 rounded p-2"
-              value={formData.shortDescription}
-              onChange={handleSelectChange}
-            />
-          </div>
+
           <div className="mb-4 mx-auto text-center">
             <Box
               sx={{
