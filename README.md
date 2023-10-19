@@ -31,19 +31,19 @@ Serfix is more than just an automotive website; it's a comprehensive solution fo
 
 - **Front-end**:
 
-  - React v17.0.2: A JavaScript library for building interactive user interfaces.
-  - React Router v5.2.0: Used for client-side routing, enabling smooth navigation between pages.
-  - Axios v0.23.0: A promise-based HTTP client for making requests to your server and fetching data.
-  - AOS (Animate On Scroll) v2.3.1: An animation library for adding scroll-based effects to website elements.
+  - React : A JavaScript library for building interactive user interfaces.
+  - React Router : Used for client-side routing, enabling smooth navigation between pages.
+  - Axios : A promise-based HTTP client for making requests to your server and fetching data.
+  - AOS (Animate On Scroll) : An animation library for adding scroll-based effects to website elements.
 
 - **Back-end**:
 
-  - Node.js v14.17.0: A JavaScript runtime used for server-side development.
-  - Express v4.17.1: A web application framework for building APIs and web applications.
+  - Node.js : A JavaScript runtime used for server-side development.
+  - Express : A web application framework for building APIs and web applications.
 
 - **Database**:
 
-  - MongoDB v5.0: A NoSQL database for storing and retrieving data efficiently.
+  - MongoDB : A NoSQL database for storing and retrieving data efficiently.
 
 - **User Authentication**:
   - Firebase Authentication: Secure user authentication system for account management.
