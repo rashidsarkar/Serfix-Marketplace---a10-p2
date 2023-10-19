@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../../MainLayout/MainLayout";
 
 function BrandCard({ item }) {
   const { brandName, brandImage } = item;
+  const { theme, setTheme } = useContext(ThemeContext);
+  const textColorStyle = {
+    color: theme === "light" ? "#252d41" : "#f1f1f1",
+  };
 
   return (
     <div>
@@ -12,7 +17,10 @@ function BrandCard({ item }) {
             <img className="rounded-t-lg" src={brandImage} alt={brandImage} />
           </div>
           <div className="p-6">
-            <p className="text-3xl font-semibold text-center text-neutral-600 dark:text-neutral-200">
+            <p
+              style={textColorStyle}
+              className="text-3xl font-semibold text-center text-neutral-600 dark:text-neutral-200"
+            >
               {brandName}
             </p>
           </div>

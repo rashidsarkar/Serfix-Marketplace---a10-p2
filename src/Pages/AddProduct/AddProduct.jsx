@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import Banar from "../../Components/Banar";
 import axios from "axios";
 import swal from "sweetalert";
-import { CarsContext } from "../../MainLayout/MainLayout";
+import { CarsContext, ThemeContext } from "../../MainLayout/MainLayout";
 
 function AddProduct() {
   const [ratingvalue, setRatingvalue] = useState(2);
@@ -63,7 +63,13 @@ function AddProduct() {
     // Reset the form fields
     e.currentTarget.reset();
   };
+  //#2C2929
+  // #CBD5E1
 
+  const { theme, setTheme } = useContext(ThemeContext);
+  const bgColorStyle = {
+    backgroundColor: theme === "light" ? "#cbd5e1" : "#2c2929",
+  };
   return (
     <div>
       <Banar
@@ -81,11 +87,14 @@ function AddProduct() {
           minHeight: "100vh",
         }}
       >
-        <div className="mx-auto max-w-lg my-6 p-6 bg-[#d54242] rounded-lg shadow-md">
-          <h1 className="text-2xl font-bold mb-4 text-white">Add Product</h1>
+        <div
+          style={bgColorStyle}
+          className="mx-auto max-w-lg my-6 p-6  rounded-lg shadow-md"
+        >
+          <h1 className="text-2xl font-bold mb-4 ">Add Product</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-200">Name:</label>
+              <label className="block font-semibold">Name:</label>
               <input
                 required
                 type="text"
@@ -94,7 +103,7 @@ function AddProduct() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-200">Image:</label>
+              <label className="block font-semibold">Image:</label>
               <input
                 required
                 type="text"
@@ -104,7 +113,7 @@ function AddProduct() {
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-200">Brand Name:</label>
+              <label className="block font-semibold">Brand Name:</label>
               <select
                 name="brand"
                 className="w-full border border-gray-300 rounded p-2 select select-bordered"
@@ -119,7 +128,7 @@ function AddProduct() {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-200">Type Name:</label>
+              <label className="block font-semibold">Type Name:</label>
               <select
                 name="type"
                 className="w-full border border-gray-300 rounded p-2 select select-bordered"
@@ -133,7 +142,7 @@ function AddProduct() {
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-200">Price:</label>
+              <label className="block font-semibold">Price:</label>
               <input
                 required
                 type="text"
@@ -142,7 +151,7 @@ function AddProduct() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-200">Short Description:</label>
+              <label className="block font-semibold">Short Description:</label>
               <textarea
                 required
                 name="shortDescription"
@@ -155,7 +164,11 @@ function AddProduct() {
                   "& > legend": { mt: 2 },
                 }}
               >
-                <Typography component="legend" className="text-white">
+                <Typography
+                  component="legend"
+                  fontWeight={600}
+                  className="font-semibold"
+                >
                   Rating
                 </Typography>
                 <Rating
@@ -170,7 +183,7 @@ function AddProduct() {
             <div className="text-center">
               <button
                 type="submit"
-                className="bg-[#FF6347] text-white py-2 px-4 rounded hover:bg-[#FF6347]"
+                className="inline-block rounded bg-[#d54242] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-[#FF6347] hover:shadow-lg focus:bg-[#d54242] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-[#d54242] active:shadow-lg dark:shadow-md dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-md"
               >
                 Add Product
               </button>

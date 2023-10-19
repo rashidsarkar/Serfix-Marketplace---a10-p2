@@ -4,6 +4,7 @@ import { SiGoogle } from "react-icons/si";
 import { AuthContext } from "../../FireBase/AuthProvider";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../MainLayout/MainLayout";
 
 function Login() {
   const { loginEmPAss, googleSing, user } = useContext(AuthContext);
@@ -38,19 +39,20 @@ function Login() {
         console.log(error.message);
       });
   };
+  const { theme, setTheme } = useContext(ThemeContext);
 
+  const bgColorStyle = {
+    backgroundColor: theme === "light" ? "#cbd5e1" : "#2c2929",
+  };
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="p-8 text-white bg-gray-800 rounded-lg shadow-md w-96">
+    <div className="flex items-center justify-center min-h-screen ">
+      <div style={bgColorStyle} className="p-8  rounded-lg shadow-md w-96">
         <h2 className="text-3xl font-semibold text-center mb-4 text-[#FF444A]">
           Login
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-300"
-            >
+            <label htmlFor="email" className="block text-sm font-medium ">
               Email
             </label>
             <input
@@ -62,10 +64,7 @@ function Login() {
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-300"
-            >
+            <label htmlFor="password" className="block text-sm font-medium ">
               Password
             </label>
             <input
@@ -83,8 +82,8 @@ function Login() {
             Login
           </button>
         </form>
-        <p className="mt-4 text-center text-gray-300">
-          <span className="text-sm text-gray-400">or</span>
+        <p className="mt-4 text-center ">
+          <span className="text-sm ">or</span>
         </p>
         <button
           onClick={handleGoogleSignIn}
@@ -93,7 +92,7 @@ function Login() {
           <SiGoogle className="w-6 h-6 mr-2" />
           Sign In with Google
         </button>
-        <p className="mt-4 text-center text-gray-300">
+        <p className="mt-4 text-center ">
           Don't have an account?{" "}
           <Link to="/signup" className="text-[#FF444A] hover:underline">
             Sign Up

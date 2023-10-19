@@ -5,7 +5,7 @@ import "aos/dist/aos.css";
 import { Box, Rating, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { CarsContext } from "../../MainLayout/MainLayout";
+import { CarsContext, ThemeContext } from "../../MainLayout/MainLayout";
 
 function CarDetails() {
   const { carID, brandName } = useParams();
@@ -82,7 +82,13 @@ function CarDetails() {
         // Handle any errors here
       });
   };
-
+  const { theme } = useContext(ThemeContext);
+  const bgColorStyleCard = {
+    backgroundColor: theme === "light" ? "#E5E6E6" : "#15191E",
+  };
+  const textColorStyle = {
+    color: theme === "light" ? "#252d41" : "#f1f1f1",
+  };
   // data-aos="zoom-in"
   return (
     <div>
@@ -104,15 +110,15 @@ function CarDetails() {
                 Price : $ {carsData?.price}
               </p>
 
-              <p className="mt-4 text-gray-700">
+              <p className="mt-4 ">
                 <strong>Brand Name:</strong> {carsData?.brand}
               </p>
-              <p className="text-gray-700">
+              <p className="">
                 <strong>Type Name:</strong> {carsData?.type}
               </p>
               <div className="mt-8">
                 <h3 className="text-2xl font-semibold">Product Details</h3>
-                <p className="mt-4 text-gray-700">
+                <p className="mt-4 ">
                   {carsData?.shortDescription?.length > 330
                     ? carsData?.shortDescription?.slice(0, 330)
                     : carsData?.shortDescription}
@@ -128,7 +134,7 @@ function CarDetails() {
                   }}
                 >
                   <Typography component="legend" className="">
-                    <p className="text-gray-600 text-xl font-medium">Rating</p>
+                    <p className=" text-xl font-medium">Rating</p>
                   </Typography>
                   {/* <Rating
                     name="simple-controlled"
@@ -145,7 +151,7 @@ function CarDetails() {
                 </Box>
               </div>
               <button
-                className="mt-8 bg-[#d54242] hover-bg-[#FF6347] text-white py-2 px-4 rounded-lg"
+                className="mt-8 bg-[#d54242] text-white font-semibold hover-bg-[#FF6347]  py-2 px-4 rounded-lg"
                 onClick={handleAddToCart}
               >
                 Add to Cart

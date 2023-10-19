@@ -1,8 +1,15 @@
+import { useContext } from "react";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { ThemeContext } from "../../MainLayout/MainLayout";
 
 function Footer() {
+  const { theme, setTheme } = useContext(ThemeContext);
+  const bgColorStyle = {
+    backgroundColor: theme === "light" ? "#cbd5e1" : "#2c2929",
+  };
+
   return (
-    <footer className="bg-slate-800 text-white py-8">
+    <footer style={bgColorStyle} className="bg-base-100  py-8">
       <div className="container mx-auto flex flex-wrap justify-center md:justify-between">
         <div className="w-full sm:w-1/2 md:w-1/4 p-4 text-center">
           <h3 className="text-xl sm:text-2xl font-bold mb-3">Contact Us</h3>
@@ -13,11 +20,19 @@ function Footer() {
         </div>
         <div className="text-center">
           <div className="">
-            <img
-              src="https://i.ibb.co/vYVFLfj/download1.png" // Add your company logo image path
-              alt="Serfix Logo"
-              className="h-16 mx-auto mb-4 "
-            />
+            {theme === "light" ? (
+              <img
+                src="https://i.ibb.co/yPGT4WM/download.png"
+                className="h-full"
+                alt=""
+              />
+            ) : (
+              <img
+                src="https://i.ibb.co/vYVFLfj/download1.png"
+                className="h-full"
+                alt=""
+              />
+            )}
           </div>
           <p>
             Serfix

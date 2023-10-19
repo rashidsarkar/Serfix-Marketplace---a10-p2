@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Box, Rating, Typography } from "@mui/material";
 import SectionTitle from "../../Components/SectionTitle";
+import { ThemeContext } from "../../MainLayout/MainLayout";
 
 function CarCard({ car }) {
   // console.log(car, brandName);
@@ -17,10 +18,10 @@ function CarCard({ car }) {
           <h2 className="card-title text-xl font-semibold italic">
             {car?.name}
           </h2>
-          <p className="text-gray-600 text-xl">
+          <p className=" text-xl">
             Brand: {car?.brand} || <span>Type: {car?.type}</span>{" "}
           </p>
-          <p className="text-gray-600 text-xl">Price: {`$${car?.price}`}</p>
+          <p className=" text-xl">Price: {`$${car?.price}`}</p>
           <div className="text-left">
             <Box
               sx={{
@@ -30,7 +31,7 @@ function CarCard({ car }) {
               }}
             >
               <Typography component="legend" className="">
-                <p className="text-gray-600 text-xl">Rating</p>
+                <p className=" text-xl">Rating</p>
               </Typography>
               <Rating name="simple-controlled" value={car?.ratingvalue} />
             </Box>

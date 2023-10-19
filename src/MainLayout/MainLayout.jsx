@@ -4,6 +4,7 @@ import Footer from "../Pages/Footer/Footer";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 export const CarsContext = createContext(null);
+export const ThemeContext = createContext(null);
 function MainLayout() {
   const [carsData, setCarsData] = useState([]);
   const [itemOnCartData, setitemOnCartData] = useState([]);
@@ -33,7 +34,15 @@ function MainLayout() {
     fetchCarsData();
     fetchItemOnCartData();
   }, []);
-
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+  );
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+  console.log(theme);
   const contextInfo = {
     carsData,
     fetchCarsData,
@@ -41,15 +50,21 @@ function MainLayout() {
     itemOnCartData,
     setitemOnCartData,
   };
+  const themeContext = {
+    setTheme,
+    theme,
+  };
   // console.log(itemOnCartData);
   return (
-    <CarsContext.Provider value={contextInfo}>
-      <div className="mx-auto max-w-7xl">
-        <NavBar></NavBar>
-        <Outlet></Outlet>
-        <Footer></Footer>
-      </div>
-    </CarsContext.Provider>
+    <ThemeContext.Provider value={themeContext}>
+      <CarsContext.Provider value={contextInfo}>
+        <div className="mx-auto max-w-7xl">
+          <NavBar></NavBar>
+          <Outlet></Outlet>
+          <Footer></Footer>
+        </div>
+      </CarsContext.Provider>
+    </ThemeContext.Provider>
   );
 }
 

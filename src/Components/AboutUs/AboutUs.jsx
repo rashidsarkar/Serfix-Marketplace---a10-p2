@@ -1,6 +1,12 @@
+import { useContext } from "react";
 import { FaArrowRight, FaCheck, FaBookOpen } from "react-icons/fa";
+import { ThemeContext } from "../../MainLayout/MainLayout";
 
 function AboutUs() {
+  const { theme, setTheme } = useContext(ThemeContext);
+  const textColorStyle = {
+    color: theme === "light" ? "#252d41" : "#f1f1f1",
+  };
   return (
     <div className="p-9 flex flex-col sm:flex-row gap-8">
       <div className="w-full sm:w-1/2">
@@ -15,31 +21,34 @@ function AboutUs() {
         <h2 className="text-4xl sm:text-4xl md:text-5xl font-bold">
           Why Choose Serfix?
         </h2>
-        <p className="text-[#393e46] text-lg sm:text-xl">
+        <p style={textColorStyle} className="text-[#393e46] text-lg sm:text-xl">
           At Serfix, we are dedicated to providing you with the best automotive
           solutions. Our commitment to excellence ensures your journey is smooth
           and enjoyable. We're here to support you every step of the way.
         </p>
-        <div className="flex flex-wrap justify-start items-start mt-4">
+        <div
+          style={textColorStyle}
+          className="flex flex-wrap justify-start items-start mt-4"
+        >
           <div className="w-1/2 flex items-center">
             <FaCheck className="text-[#d54242] mr-2" />
-            <span className="text-[#393e46]">
+            <span className="texat-[#393e46]">
               We offer top-quality vehicles.
             </span>
           </div>
           <div className="w-1/2 flex items-center">
             <FaCheck className="text-[#d54242] mr-2" />
-            <span className="text-[#393e46]">Our team is experienced.</span>
+            <span className="teaxt-[#393e46]">Our team is experienced.</span>
           </div>
           <div className="w-1/2 flex items-center">
             <FaCheck className="text-[#d54242] mr-2" />
-            <span className="text-[#393e46]">
+            <span className="teaxt-[#393e46]">
               We provide competitive prices.
             </span>
           </div>
           <div className="w-1/2 flex items-center">
             <FaCheck className="text-[#d54242] mr-2" />
-            <span className="text-[#393e46]">
+            <span className="teaxt-[#393e46]">
               Your satisfaction is our top priority.
             </span>
           </div>

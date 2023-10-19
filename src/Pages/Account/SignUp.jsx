@@ -4,6 +4,7 @@ import { SiGoogle } from "react-icons/si";
 import swal from "sweetalert";
 import { AuthContext } from "../../FireBase/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../MainLayout/MainLayout";
 
 function SignUp() {
   const { singupWithEmalPass, googleSing, user, setUser, updateProfiles } =
@@ -76,19 +77,25 @@ function SignUp() {
       });
   };
 
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const bgColorStyle = {
+    backgroundColor: theme === "light" ? "#cbd5e1" : "#2c2929",
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="p-8 text-white bg-gray-800 rounded-lg shadow-md w-96">
+    <div className="flex items-center justify-center min-h-screen my-4 ">
+      <div
+        style={bgColorStyle}
+        className="p-8  bg-gray-800 rounded-lg shadow-md w-96"
+      >
         <h2 className="text-3xl font-semibold text-center mb-6 text-[#FF444A]">
           Create an Account
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-6">
             <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-300"
-              >
+              <label htmlFor="name" className="block text-sm font-medium ">
                 Full Name
               </label>
               <input
@@ -100,10 +107,7 @@ function SignUp() {
               />
             </div>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-300"
-              >
+              <label htmlFor="email" className="block text-sm font-medium ">
                 Email Address
               </label>
               <input
@@ -116,10 +120,7 @@ function SignUp() {
             </div>
           </div>
           <div className="mt-6">
-            <label
-              htmlFor="image"
-              className="block text-sm font-medium text-gray-300"
-            >
+            <label htmlFor="image" className="block text-sm font-medium ">
               Profile Image (Link)
             </label>
             <input
@@ -130,10 +131,7 @@ function SignUp() {
             />
           </div>
           <div className="mt-6">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-300"
-            >
+            <label htmlFor="password" className="block text-sm font-medium t">
               Password
             </label>
             <input
@@ -151,8 +149,8 @@ function SignUp() {
             Sign Up
           </button>
         </form>
-        <p className="mt-4 text-center text-gray-300">
-          <span className="text-sm text-gray-400">or</span>
+        <p className="mt-4 text-center ">
+          <span className="text-sm ">or</span>
         </p>
         <button
           onClick={handleGoogleSignUp}
@@ -161,7 +159,7 @@ function SignUp() {
           <SiGoogle className="w-6 h-6 mr-2" />
           Sign Up with Google
         </button>
-        <p className="mt-4 text-center text-gray-300">
+        <p className="mt-4 text-center ">
           Already have an account?{" "}
           <Link to="/login" className="text-[#FF444A] hover:underline">
             Login
