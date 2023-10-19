@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Paper, Typography, Button, Rating, Box } from "@mui/material";
 import { CarsContext } from "../../MainLayout/MainLayout";
 import swal from "sweetalert";
 import axios from "axios";
 
 const ItemCard = ({ item }) => {
-  const { fetchCarsData, carsData, fetchItemOnCartData, itemOnCartData } =
+  const { fetchCarsData, fetchItemOnCartData, itemOnCartData } =
     useContext(CarsContext);
+  const [carsData, setCarsData] = useState([]);
 
   const {
     image,
@@ -16,9 +17,36 @@ const ItemCard = ({ item }) => {
     price,
     shortDescription,
     _id,
-    Ratingvalue,
-  } = item;
+    ratingvalue,
+  } = carsData;
+  // console.log(carsData);
+  // http://localhost:5000/itemOnCart
   // console.log(typeof +_id);
+
+  // const { brandName } = useParams();
+
+  // console.log(brandName);
+  // const filteredData = carsData.filter((car) => car.brand === brandName);
+
+  useEffect(() => {
+    const fetchCarsData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/itemOnCart/${item._id}`
+        );
+        setCarsData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCarsData(); // Call the function
+
+    // Add fetchCarsData to the dependency array
+  }, [item._id]);
+  const myRateingFomDB = carsData?.ratingvalue;
+  // console.log(myRateingFomDB);
   const handleDelete = (itemId) => {
     swal({
       title: "Are you sure?",
@@ -29,9 +57,7 @@ const ItemCard = ({ item }) => {
     }).then((res) => {
       if (res) {
         axios
-          .delete(
-            `https://car-web-server-three.vercel.app/itemOnCart/${itemId}`
-          )
+          .delete(`http://localhost:5000/itemOnCart/${itemId}`)
           .then((res) => {
             console.log(res.data);
 
@@ -87,9 +113,15 @@ const ItemCard = ({ item }) => {
               <Typography component="legend" className="">
                 <p className="text-gray-600 text-xl font-medium">Rating</p>
               </Typography>
-              <Rating name="simple-controlled" value={4} />
+              {/* <Rating name="simple-controlled" value={myRateingFomDB} /> */}
+              {/* <Rating
+                name="simple-controlled"
+                // value={ratingvalue}
+                defaultValue={Number(myRateingFomDB)}
+              /> */}
+
+              <Rating name="simple-controlled" value={+carsData?.ratingvalue} />
             </Box>
-            {Ratingvalue}
           </Typography>
           <p className="text-lg text-gray-600 text-justify pt-2">
             {shortDescription?.length > 330

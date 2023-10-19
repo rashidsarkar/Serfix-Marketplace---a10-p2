@@ -16,7 +16,7 @@ function NavBar() {
         console.log(error);
       });
   };
-  console.log(user);
+  // console.log(user);
 
   const navLinks = (
     <>

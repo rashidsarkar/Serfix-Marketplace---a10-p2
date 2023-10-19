@@ -9,16 +9,34 @@ import { CarsContext } from "../../MainLayout/MainLayout";
 
 function CarDetails() {
   const { carID, brandName } = useParams();
+  const [carsData, setCarsData] = useState([]);
+
   const {
     fetchCarsData,
-    carsData,
+
     fetchItemOnCartData,
     setitemOnCartData,
     itemOnCartData,
   } = useContext(CarsContext);
 
-  const filteredData = carsData.find((car) => car._id === carID);
+  // const filteredData = carsData.find((car) => car._id === carID);
   // console.log(filteredData);
+
+  useEffect(() => {
+    const fetchCarsData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/cars/${carID}`);
+        setCarsData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCarsData(); // Call the function
+
+    // Add fetchCarsData to the dependency array
+  }, [carID]);
 
   useEffect(() => {
     AOS.init({
@@ -26,43 +44,26 @@ function CarDetails() {
       once: true,
     });
   }, []);
-  // console.log(filteredData);
 
   const itemToCart = {
-    brand: filteredData?.brand,
-    image: filteredData?.image,
-    name: filteredData?.name,
-    price: filteredData?.price,
-    ratingvalue: filteredData?.ratingvalue,
-    shortDescription: filteredData?.shortDescription,
-    type: filteredData?.type,
+    brand: carsData?.brand,
+    image: carsData?.image,
+    name: carsData?.name,
+    price: carsData?.price,
+    ratingvalue: carsData?.ratingvalue,
+    shortDescription: carsData?.shortDescription,
+    type: carsData?.type,
   };
-  // console.log(filteredData);
-  // console.log(itemToCart);
+
   const handleAddToCart = () => {
-    // const carInCart = itemOnCartData.find(
-    //   (item) => item.name === itemToCart.name
-    // );
-    // if (carInCart) {
-    //   // Show a SweetAlert to inform the user
-    //   Swal.fire({
-    //     icon: "info",
-    //     title: "Car Already in Cart",
-    //     text: "This car is already in your cart.",
-    //     showConfirmButton: true,
-    //   });
-    // } else {
     axios
-      .post("https://car-web-server-three.vercel.app/itemOnCart", itemToCart, {
+      .post("http://localhost:5000/itemOnCart", itemToCart, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         if (response.data.insertedId) {
-          // Refresh the coffeeData
-          // fetchCoffeeData();
-          // fetchCarsData();
           fetchCarsData();
           fetchItemOnCartData();
           console.log(response.data);
@@ -79,45 +80,40 @@ function CarDetails() {
         // Handle any errors here
       });
   };
-  // Swal.fire({
-  //   icon: "success",
-  //   title: "Car added to cart",
-  //   text: "The car has been added to the cart.",
-  //   showConfirmButton: true,
-  // });
 
+  // data-aos="zoom-in"
   return (
     <div>
       <div className="py-10 pt-[50px]">
         <div className="container mx-auto">
-          <div className="flex flex-wrap">
-            <div data-aos="zoom-in" className="w-full md:w-1/2">
+          <div data-aos="zoom-in" className="flex flex-wrap">
+            <div className="w-full md:w-1/2">
               <img
-                src={filteredData?.image}
+                src={carsData?.image}
                 alt="Product Image"
                 className="w-full rounded-lg"
               />
             </div>
             <div data-aos="zoom-in" className="w-full p-8 md:w-1/2">
               <h2 className="text-3xl italic font-semibold">
-                {filteredData?.name}
+                {carsData?.name}
               </h2>
               <p className="text-xl font-bold text-[#d54242]">
-                Price : $ {filteredData?.price}
+                Price : $ {carsData?.price}
               </p>
 
               <p className="mt-4 text-gray-700">
-                <strong>Brand Name:</strong> {filteredData?.brand}
+                <strong>Brand Name:</strong> {carsData?.brand}
               </p>
               <p className="text-gray-700">
-                <strong>Type Name:</strong> {filteredData?.type}
+                <strong>Type Name:</strong> {carsData?.type}
               </p>
               <div className="mt-8">
                 <h3 className="text-2xl font-semibold">Product Details</h3>
                 <p className="mt-4 text-gray-700">
-                  {filteredData?.shortDescription?.length > 330
-                    ? filteredData?.shortDescription?.slice(0, 330)
-                    : filteredData?.shortDescription}
+                  {carsData?.shortDescription?.length > 330
+                    ? carsData?.shortDescription?.slice(0, 330)
+                    : carsData?.shortDescription}
                   ...
                 </p>
               </div>
@@ -132,9 +128,17 @@ function CarDetails() {
                   <Typography component="legend" className="">
                     <p className="text-gray-600 text-xl font-medium">Rating</p>
                   </Typography>
+                  {/* <Rating
+                    name="simple-controlled"
+                    value={+carsData?.ratingvalue}
+                  /> */}
+                  {/* <Rating
+                    name="simple-controlled"
+                    value={carsData?.ratingvalue}
+                  /> */}
                   <Rating
                     name="simple-controlled"
-                    value={+filteredData?.ratingvalue}
+                    value={+carsData?.ratingvalue}
                   />
                 </Box>
               </div>

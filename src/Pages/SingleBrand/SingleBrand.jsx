@@ -13,12 +13,31 @@ import CarCard from "../CarCard/CarCard";
 import { CarsContext } from "../../MainLayout/MainLayout";
 
 function SingleBrand() {
-  const { fetchCarsData, carsData } = useContext(CarsContext);
+  // const { fetchCarsData, carsData } = useContext(CarsContext);
+  const [carsData, setCarsData] = useState([]);
 
   const { brandName } = useParams();
 
   // console.log(brandName);
-  const filteredData = carsData.filter((car) => car.brand === brandName);
+  // const filteredData = carsData.filter((car) => car.brand === brandName);
+
+  useEffect(() => {
+    const fetchCarsData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/brandName/${brandName}`
+        );
+        setCarsData(response.data);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCarsData(); // Call the function
+
+    // Add fetchCarsData to the dependency array
+  }, [brandName]);
 
   return (
     <div>
@@ -65,11 +84,11 @@ function SingleBrand() {
         <SectionTitle title={`${brandName} Collection`} />
 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
-          {filteredData.map((car) => (
+          {carsData.map((car) => (
             <CarCard car={car} key={car._id}></CarCard>
           ))}
         </div>
-        {filteredData.length === 0 && (
+        {carsData.length === 0 && (
           <div className="text-xl text-center text-gray-600 min-h-[60vh]">
             No products available for this brand at the moment.
           </div>

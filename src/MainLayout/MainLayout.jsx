@@ -10,9 +10,7 @@ function MainLayout() {
 
   const fetchCarsData = async () => {
     try {
-      const response = await axios.get(
-        "https://car-web-server-three.vercel.app/cars"
-      );
+      const response = await axios.get("http://localhost:5000/cars");
       setCarsData(response.data);
     } catch (error) {
       console.error(error);
@@ -20,14 +18,13 @@ function MainLayout() {
   };
   const fetchItemOnCartData = async () => {
     try {
-      const response = await axios.get(
-        "https://car-web-server-three.vercel.app/itemOnCart"
-      );
+      const response = await axios.get("http://localhost:5000/itemOnCart");
       setitemOnCartData(response.data);
     } catch (error) {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchCarsData();
     fetchItemOnCartData();

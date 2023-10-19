@@ -54,7 +54,7 @@ function UpDateProduct() {
 
     axios
       .put(
-        `https://car-web-server-three.vercel.app/cars/${filteredData?._id}`,
+        `http://localhost:5000/cars/${filteredData?._id}`,
         updatedProductData,
         {
           headers: {
