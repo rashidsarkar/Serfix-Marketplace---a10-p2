@@ -87,6 +87,7 @@ function AddProduct() {
             <div className="mb-4">
               <label className="block text-gray-200">Name:</label>
               <input
+                required
                 type="text"
                 name="name"
                 className="w-full border border-gray-300 rounded p-2"
@@ -95,6 +96,7 @@ function AddProduct() {
             <div className="mb-4">
               <label className="block text-gray-200">Image:</label>
               <input
+                required
                 type="text"
                 name="image"
                 className="w-full border border-gray-300 rounded p-2"
@@ -133,6 +135,7 @@ function AddProduct() {
             <div className="mb-4">
               <label className="block text-gray-200">Price:</label>
               <input
+                required
                 type="text"
                 name="price"
                 className="w-full border border-gray-300 rounded p-2"
@@ -141,6 +144,7 @@ function AddProduct() {
             <div className="mb-4">
               <label className="block text-gray-200">Short Description:</label>
               <textarea
+                required
                 name="shortDescription"
                 className="w-full border border-gray-300 rounded p-2"
               />
