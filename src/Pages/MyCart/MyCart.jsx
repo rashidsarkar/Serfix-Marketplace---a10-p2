@@ -51,7 +51,11 @@ function MyCart() {
           })
           .catch((err) => {
             console.error(err);
-            swal("Error", "An error occurred while deleting the Car.", "error");
+            swal(
+              "Error",
+              "An error occurred while deleting the Car..",
+              "error"
+            );
           });
       } else {
         swal("Car is safe!");
