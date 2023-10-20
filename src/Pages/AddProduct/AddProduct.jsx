@@ -35,7 +35,7 @@ function AddProduct() {
     };
 
     axios
-      .post("http://localhost:5000/cars", productData, {
+      .post("https://car-web-server-three.vercel.app/cars", productData, {
         headers: {
           "Content-Type": "application/json",
         },

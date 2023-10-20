@@ -18,7 +18,7 @@ function MyCart() {
   const fetchCarsDataOnMycat = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/itemOnCart/${currentUserId}`
+        `https://car-web-server-three.vercel.app/itemOnCart/${currentUserId}`
       );
       setCarsDataForUI(response.data);
       fetchItemOnCartData();
@@ -41,7 +41,9 @@ function MyCart() {
     }).then((res) => {
       if (res) {
         axios
-          .delete(`http://localhost:5000/itemOnCart/${itemId}`)
+          .delete(
+            `https://car-web-server-three.vercel.app/itemOnCart/${itemId}`
+          )
           .then((res) => {
             console.log(res.data);
             fetchCarsDataOnMycat();

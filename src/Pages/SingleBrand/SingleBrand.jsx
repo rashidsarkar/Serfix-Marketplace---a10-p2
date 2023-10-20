@@ -25,7 +25,7 @@ function SingleBrand() {
     const fetchCarsData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/brandName/${brandName}`
+          `https://car-web-server-three.vercel.app/brandName/${brandName}`
         );
         setCarsData(response.data);
         console.log(response);

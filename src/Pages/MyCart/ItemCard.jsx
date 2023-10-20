@@ -26,7 +26,7 @@ const ItemCard = ({ item, handleDelete }) => {
     ratingvalue,
   } = item;
   // console.log(carsData);
-  // http://localhost:5000/itemOnCart
+  // https://car-web-server-three.vercel.app/itemOnCart
   // console.log(typeof +_id);
 
   // const { brandName } = useParams();
@@ -38,7 +38,7 @@ const ItemCard = ({ item, handleDelete }) => {
     const fetchCarsData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/itemOnCart/107944353138273121977`
+          `https://car-web-server-three.vercel.app/itemOnCart/107944353138273121977`
         );
         setCarsData(response.data);
         // console.log(response.data);
