@@ -6,7 +6,6 @@ import { Box, Rating, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { CarsContext, ThemeContext } from "../../MainLayout/MainLayout";
-import { AuthContext } from "../../FireBase/AuthProvider";
 
 function CarDetails() {
   const { carID, brandName } = useParams();
@@ -19,7 +18,6 @@ function CarDetails() {
     setitemOnCartData,
     itemOnCartData,
   } = useContext(CarsContext);
-  const { user, logOut } = useContext(AuthContext);
 
   // const filteredData = carsData.find((car) => car._id === carID);
   // console.log(filteredData);
@@ -48,7 +46,7 @@ function CarDetails() {
       once: true,
     });
   }, []);
-  const currentUserId = user.providerData[0].uid;
+
   const itemToCart = {
     brand: carsData?.brand,
     image: carsData?.image,
@@ -57,7 +55,6 @@ function CarDetails() {
     ratingvalue: carsData?.ratingvalue,
     shortDescription: carsData?.shortDescription,
     type: carsData?.type,
-    currentUserId: currentUserId,
   };
 
   const handleAddToCart = () => {

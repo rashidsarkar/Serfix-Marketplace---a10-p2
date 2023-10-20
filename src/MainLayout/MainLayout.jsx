@@ -1,23 +1,13 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../Components/NavBar";
 import Footer from "../Pages/Footer/Footer";
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  useCallback,
-} from "react"; // Import useCallback
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { AuthContext } from "../FireBase/AuthProvider";
 export const CarsContext = createContext(null);
 export const ThemeContext = createContext(null);
-
 function MainLayout() {
   const [carsData, setCarsData] = useState([]);
   const [itemOnCartData, setitemOnCartData] = useState([]);
-  const { user, logOut } = useContext(AuthContext);
-  const currentUserId = user?.providerData[0]?.uid;
 
   const fetchCarsData = async () => {
     try {
@@ -29,36 +19,30 @@ function MainLayout() {
       console.error(error);
     }
   };
-
-  // Wrap fetchItemOnCartData in useCallback to memoize it
-  const fetchItemOnCartData = useCallback(async () => {
+  const fetchItemOnCartData = async () => {
     try {
       const response = await axios.get(
-        `https://car-web-server-three.vercel.app/itemOnCart/${currentUserId}`
+        "https://car-web-server-three.vercel.app/itemOnCart"
       );
       setitemOnCartData(response.data);
     } catch (error) {
       console.error(error);
     }
-  }, [currentUserId]);
+  };
 
   useEffect(() => {
     fetchCarsData();
     fetchItemOnCartData();
-  }, [currentUserId, fetchItemOnCartData]); // Include fetchItemOnCartData in the dependencies
-
+  }, []);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
-
   useEffect(() => {
     localStorage.setItem("theme", theme);
     const localTheme = localStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
-
-  console.log(itemOnCartData);
-
+  console.log(theme);
   const contextInfo = {
     carsData,
     fetchCarsData,
@@ -70,7 +54,7 @@ function MainLayout() {
     setTheme,
     theme,
   };
-
+  // console.log(itemOnCartData);
   return (
     <ThemeContext.Provider value={themeContext}>
       <CarsContext.Provider value={contextInfo}>
