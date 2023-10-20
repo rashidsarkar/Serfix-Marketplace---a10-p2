@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 function UpdateProduct() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
-  const { fetchCarsData, fetchItemOnCartData } = useContext(CarsContext);
 
   // State to hold the form data
   const [formData, setFormData] = useState({
@@ -65,8 +64,6 @@ function UpdateProduct() {
       .then((response) => {
         if (response.data.modifiedCount) {
           swal("Success", "Product updated successfully!", "success");
-          fetchCarsData();
-          fetchItemOnCartData();
         }
       })
       .catch((error) => {
@@ -75,7 +72,7 @@ function UpdateProduct() {
       });
   };
 
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const bgColorStyle = {
     backgroundColor: theme === "light" ? "#cbd5e1" : "#2c2929",
   };

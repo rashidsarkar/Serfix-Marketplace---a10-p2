@@ -52,7 +52,10 @@ function SignUp() {
                 displayName: name,
                 photoURL: image,
                 email: email,
+                uid: currentUser.user.uid,
               });
+              console.log(currentUser.user);
+              console.log(user);
             })
             .catch();
 
@@ -87,7 +90,7 @@ function SignUp() {
     <div className="flex items-center justify-center min-h-screen my-4 ">
       <div
         style={bgColorStyle}
-        className="p-8  bg-gray-800 rounded-lg shadow-md w-96"
+        className="p-8 bg-gray-800 rounded-lg shadow-md w-96"
       >
         <h2 className="text-3xl font-semibold text-center mb-6 text-[#FF444A]">
           Create an Account

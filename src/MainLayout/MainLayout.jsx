@@ -7,7 +7,6 @@ export const CarsContext = createContext(null);
 export const ThemeContext = createContext(null);
 function MainLayout() {
   const [carsData, setCarsData] = useState([]);
-  const [itemOnCartData, setitemOnCartData] = useState([]);
 
   const fetchCarsData = async () => {
     try {
@@ -19,20 +18,9 @@ function MainLayout() {
       console.error(error);
     }
   };
-  const fetchItemOnCartData = async () => {
-    try {
-      const response = await axios.get(
-        "https://car-web-server-three.vercel.app/itemOnCart"
-      );
-      setitemOnCartData(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   useEffect(() => {
     fetchCarsData();
-    fetchItemOnCartData();
   }, []);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
@@ -42,13 +30,10 @@ function MainLayout() {
     const localTheme = localStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
-  console.log(theme);
+
   const contextInfo = {
     carsData,
     fetchCarsData,
-    fetchItemOnCartData,
-    itemOnCartData,
-    setitemOnCartData,
   };
   const themeContext = {
     setTheme,

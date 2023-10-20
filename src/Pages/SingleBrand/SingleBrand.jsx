@@ -28,7 +28,7 @@ function SingleBrand() {
           `https://car-web-server-three.vercel.app/brandName/${brandName}`
         );
         setCarsData(response.data);
-        console.log(response);
+        // console.log(response);
       } catch (error) {
         console.error(error);
       }
@@ -83,7 +83,7 @@ function SingleBrand() {
       <div>
         <SectionTitle title={`${brandName} Collection`} />
 
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2">
           {carsData.map((car) => (
             <CarCard car={car} key={car._id}></CarCard>
           ))}

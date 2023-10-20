@@ -15,7 +15,7 @@ function NavBar() {
   //   const localTheme = localStorage.getItem("theme");
   //   document.querySelector("html").setAttribute("data-theme", localTheme);
   // }, [theme]);
-  console.log(theme);
+  // console.log(theme);
   const handleToggle = (e) => {
     if (e.target.checked) {
       setTheme("dark");
@@ -92,10 +92,10 @@ function NavBar() {
   return (
     <div
       style={bgColorStyle}
-      className="left-0 right-0 z-50 w-full mx-auto rounded-b-none     navbar "
+      className="left-0 right-0 z-50 w-full mx-auto rounded-b-none navbar "
     >
       <div className="w-full lg:w-[50%] navbar-start">
-        <div className="dropdown z-50">
+        <div className="z-50 dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@ function NavBar() {
 
           {/* sun icon */}
           <svg
-            className="swap-on fill-current w-10 h-10"
+            className="w-10 h-10 fill-current swap-on"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -166,7 +166,7 @@ function NavBar() {
 
           {/* moon icon */}
           <svg
-            className="swap-off fill-current w-10 h-10"
+            className="w-10 h-10 fill-current swap-off"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -176,7 +176,7 @@ function NavBar() {
         {/* togol End */}
         {user ? (
           // User is authenticated, show user menu
-          <div className="dropdown z-50  dropdown-end">
+          <div className="z-50 dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img src={user?.photoURL} />
@@ -188,10 +188,10 @@ function NavBar() {
             >
               <li>
                 <div className="flex flex-col px-4 py-3 ">
-                  <span className="block text-sm  dark:text-white">
+                  <span className="block text-sm dark:text-white">
                     {user.displayName || "Display Name"}
                   </span>
-                  <span className="block text-sm  truncate dark:text-gray-400">
+                  <span className="block text-sm truncate dark:text-gray-400">
                     {user.email || "Email"}
                   </span>
                 </div>

@@ -1,15 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Paper, Typography, Button, Rating, Box } from "@mui/material";
-import { CarsContext, ThemeContext } from "../../MainLayout/MainLayout";
+import React, { useContext } from "react";
+import { Rating } from "@mui/material";
+import { ThemeContext } from "../../MainLayout/MainLayout";
 import swal from "sweetalert";
 import axios from "axios";
-// import { ThemeContext } from "@emotion/react";
 
-const ItemCard = ({ item }) => {
-  const { fetchCarsData, fetchItemOnCartData, itemOnCartData } =
-    useContext(CarsContext);
-  const [carsData, setCarsData] = useState([]);
-
+const ItemCard = ({ item, onDelete }) => {
   const {
     image,
     name,
@@ -19,35 +14,8 @@ const ItemCard = ({ item }) => {
     shortDescription,
     _id,
     ratingvalue,
-  } = carsData;
-  // console.log(carsData);
-  // https://car-web-server-three.vercel.app/itemOnCart
-  // console.log(typeof +_id);
+  } = item;
 
-  // const { brandName } = useParams();
-
-  // console.log(brandName);
-  // const filteredData = carsData.filter((car) => car.brand === brandName);
-
-  useEffect(() => {
-    const fetchCarsData = async () => {
-      try {
-        const response = await axios.get(
-          `https://car-web-server-three.vercel.app/itemOnCart/${item._id}`
-        );
-        setCarsData(response.data);
-        // console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchCarsData(); // Call the function
-
-    // Add fetchCarsData to the dependency array
-  }, [item._id]);
-  const myRateingFomDB = carsData?.ratingvalue;
-  // console.log(myRateingFomDB);
   const handleDelete = (itemId) => {
     swal({
       title: "Are you sure?",
@@ -61,11 +29,8 @@ const ItemCard = ({ item }) => {
           .delete(
             `https://car-web-server-three.vercel.app/itemOnCart/${itemId}`
           )
-          .then((res) => {
-            console.log(res.data);
-
-            fetchItemOnCartData();
-
+          .then(() => {
+            onDelete(itemId); // Trigger a re-render in the parent component
             swal("Success", "Car deleted successfully!", "success");
           })
           .catch((err) => {
@@ -77,6 +42,7 @@ const ItemCard = ({ item }) => {
       }
     });
   };
+
   const { theme } = useContext(ThemeContext);
   const bgColorStyleCard = {
     backgroundColor: theme === "light" ? "#E5E6E6" : "#15191E",
@@ -85,48 +51,46 @@ const ItemCard = ({ item }) => {
     color: theme === "light" ? "#252d41" : "#f1f1f1",
   };
 
-  console.log(theme);
-  // const backgroundColor = theme === "light" ? "#E6E6" : "#191E";
   return (
-    <div className="my-4 p-4">
+    <div className="p-4 my-4">
       <div
         style={bgColorStyleCard}
-        className="sm:mb-10 lg:grid lg:grid-cols-5 md:grid-cols-none   lg:h-full"
+        className="sm:mb-10 lg:grid lg:grid-cols-5 md:grid-cols-none lg:h-full"
       >
-        <div className="px-10 py-10 max-w-md m-auto lg:col-span-2 mt-20 mb-20 shadow-xl rounded-xl lg:mt-10 md:shadow-xl md:rounded-xl lg:shadow-none lg:rounded-none lg:w-full lg:mb-10 lg:px-5 lg:pt-5 lg:pb-5 ">
+        <div className="max-w-md px-10 py-10 m-auto mt-20 mb-20 shadow-xl lg:col-span-2 rounded-xl lg:mt-10 md:shadow-xl md:rounded-xl lg:shadow-none lg:rounded-none lg:w-full lg:mb-10 lg:px-5 lg:pt-5 lg:pb-5 ">
           <img
-            className="h-64 sm:h-52 sm:w-full sm:object-cover lg:hidden object-center mt-2 rounded-lg shadow-2xl"
+            className="object-center h-64 mt-2 rounded-lg shadow-2xl sm:h-52 sm:w-full sm:object-cover lg:hidden"
             src={image}
             alt={name}
           />
-          <h1 className="mt-5 font-bold text-3xl italic lg:mb-4 lg:mt-7">
+          <h1 className="mt-5 text-3xl italic font-bold lg:mb-4 lg:mt-7">
             {name}
           </h1>
           <div>
             <p
               style={textColorStyle}
-              className="font-semibold text-xl text-gray-600"
+              className="text-xl font-semibold text-gray-600"
             >
               Brand: {brand} | Type: {type}
             </p>
             <p
               style={textColorStyle}
-              className="font-semibold text-xl text-gray-600"
+              className="text-xl font-semibold text-gray-600"
             >
               Price: ${price}
             </p>
             <div className="flex items-center gap-2">
               <p
                 style={textColorStyle}
-                className="text-gray-600 text-xl font-medium"
+                className="text-xl font-medium text-gray-600"
               >
                 Rating
               </p>
-              <Rating name="simple-controlled" value={+carsData?.ratingvalue} />
+              <Rating name="simple-controlled" value={+item?.ratingvalue} />
             </div>
             <p
               style={textColorStyle}
-              className="text-lg text-gray-600 text-justify pt-2"
+              className="pt-2 text-lg text-justify text-gray-600"
             >
               {shortDescription?.length > 330
                 ? shortDescription?.slice(0, 200)
@@ -141,9 +105,9 @@ const ItemCard = ({ item }) => {
             Delete
           </button>
         </div>
-        <div className="hidden relative lg:block lg:col-span-3">
+        <div className="relative hidden lg:block lg:col-span-3">
           <img
-            className="absolute inset-0 w-full h-full object-cover object-center rounded-xl"
+            className="absolute inset-0 object-cover object-center w-full h-full rounded-xl"
             src={image}
             alt={name}
           />

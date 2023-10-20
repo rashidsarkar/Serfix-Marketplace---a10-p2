@@ -7,9 +7,6 @@ import { CarsContext, ThemeContext } from "../../MainLayout/MainLayout";
 
 function AddProduct() {
   const [ratingvalue, setRatingvalue] = useState(2);
-  const { fetchCarsData, carsData, fetchItemOnCartData } =
-    useContext(CarsContext);
-  console.log(fetchCarsData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,8 +42,6 @@ function AddProduct() {
         if (response.data.insertedId) {
           // Refresh the coffeeData
           // fetchCoffeeData();
-          fetchCarsData();
-          fetchItemOnCartData();
 
           swal("Success", "Product added successfully!", "success");
         }
@@ -66,7 +61,7 @@ function AddProduct() {
   //#2C2929
   // #CBD5E1
 
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const bgColorStyle = {
     backgroundColor: theme === "light" ? "#cbd5e1" : "#2c2929",
   };
@@ -89,9 +84,9 @@ function AddProduct() {
       >
         <div
           style={bgColorStyle}
-          className="mx-auto max-w-lg my-6 p-6  rounded-lg shadow-md"
+          className="max-w-lg p-6 mx-auto my-6 rounded-lg shadow-md"
         >
-          <h1 className="text-2xl font-bold mb-4 ">Add Product</h1>
+          <h1 className="mb-4 text-2xl font-bold ">Add Product</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block font-semibold">Name:</label>
@@ -99,7 +94,7 @@ function AddProduct() {
                 required
                 type="text"
                 name="name"
-                className="w-full border border-gray-300 rounded p-2"
+                className="w-full p-2 border border-gray-300 rounded"
               />
             </div>
             <div className="mb-4">
@@ -108,7 +103,7 @@ function AddProduct() {
                 required
                 type="text"
                 name="image"
-                className="w-full border border-gray-300 rounded p-2"
+                className="w-full p-2 border border-gray-300 rounded"
               />
             </div>
 
@@ -116,7 +111,7 @@ function AddProduct() {
               <label className="block font-semibold">Brand Name:</label>
               <select
                 name="brand"
-                className="w-full border border-gray-300 rounded p-2 select select-bordered"
+                className="w-full p-2 border border-gray-300 rounded select select-bordered"
               >
                 <option value="Toyota">Toyota</option>
                 <option value="Ford">Ford</option>
@@ -131,7 +126,7 @@ function AddProduct() {
               <label className="block font-semibold">Type Name:</label>
               <select
                 name="type"
-                className="w-full border border-gray-300 rounded p-2 select select-bordered"
+                className="w-full p-2 border border-gray-300 rounded select select-bordered"
               >
                 <option value="Hybrid">Hybrid</option>
                 <option value="SportsCar">Sports Car</option>
@@ -147,7 +142,7 @@ function AddProduct() {
                 required
                 type="text"
                 name="price"
-                className="w-full border border-gray-300 rounded p-2"
+                className="w-full p-2 border border-gray-300 rounded"
               />
             </div>
             <div className="mb-4">
@@ -155,10 +150,10 @@ function AddProduct() {
               <textarea
                 required
                 name="shortDescription"
-                className="w-full border border-gray-300 rounded p-2"
+                className="w-full p-2 border border-gray-300 rounded"
               />
             </div>
-            <div className="mb-4 mx-auto text-center">
+            <div className="mx-auto mb-4 text-center">
               <Box
                 sx={{
                   "& > legend": { mt: 2 },
