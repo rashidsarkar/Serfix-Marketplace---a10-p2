@@ -83,9 +83,9 @@ function UpdateProduct() {
     <div>
       <div
         style={bgColorStyle}
-        className="mx-auto max-w-lg my-6 p-6  rounded-lg shadow-md"
+        className="max-w-lg p-6 mx-auto my-6 rounded-lg shadow-md"
       >
-        <h1 className="text-2xl font-bold mb-4 ">Update Product</h1>
+        <h1 className="mb-4 text-2xl font-bold ">Update Product</h1>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -94,7 +94,7 @@ function UpdateProduct() {
               required
               type="text"
               name="name"
-              className="w-full border border-gray-300 rounded p-2"
+              className="w-full p-2 border border-gray-300 rounded"
               value={formData.name}
               onChange={handleSelectChange}
             />
@@ -105,7 +105,7 @@ function UpdateProduct() {
               required
               type="text"
               name="image"
-              className="w-full border border-gray-300 rounded p-2"
+              className="w-full p-2 border border-gray-300 rounded"
               value={formData.image}
               onChange={handleSelectChange}
             />
@@ -115,7 +115,7 @@ function UpdateProduct() {
             <label className="block ">Brand Name:</label>
             <select
               name="brand"
-              className="w-full border border-gray-300 rounded p-2 select select-bordered"
+              className="w-full p-2 border border-gray-300 rounded select select-bordered"
               value={formData.brand}
               onChange={handleSelectChange}
             >
@@ -132,7 +132,7 @@ function UpdateProduct() {
             <label className="block ">Type Name:</label>
             <select
               name="type"
-              className="w-full border border-gray-300 rounded p-2 select select-bordered"
+              className="w-full p-2 border border-gray-300 rounded select select-bordered"
               value={formData.type}
               onChange={handleSelectChange}
             >
@@ -149,13 +149,13 @@ function UpdateProduct() {
               required
               type="text"
               name="price"
-              className="w-full border border-gray-300 rounded p-2"
+              className="w-full p-2 border border-gray-300 rounded"
               value={formData.price}
               onChange={handleSelectChange}
             />
           </div>
 
-          <div className="mb-4 mx-auto text-center">
+          <div className="mx-auto mb-4 text-center">
             <Box
               sx={{
                 "& > legend": { mt: 2 },

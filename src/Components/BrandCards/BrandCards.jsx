@@ -26,7 +26,7 @@ function BrandCards() {
   }
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 md:gap-10  grid-cols-1">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 md:gap-10 gap-10  grid-cols-1">
       {/* Display your brand cards here */}
       {cardOfBrand.map((item, idx) => (
         <BrandCard item={item} key={idx} />
