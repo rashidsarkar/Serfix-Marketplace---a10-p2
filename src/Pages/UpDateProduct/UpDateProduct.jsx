@@ -24,9 +24,7 @@ function UpdateProduct() {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(
-          `https://car-web-server-three.vercel.app/cars/${id}`
-        );
+        const response = await axios.get(`http://localhost:5000/cars/${id}`);
         setFormData(response.data);
       } catch (error) {
         console.error(error);
@@ -57,7 +55,7 @@ function UpdateProduct() {
     setLoading(true);
 
     axios
-      .put(`https://car-web-server-three.vercel.app/cars/${id}`, formData, {
+      .put(`http://localhost:5000/cars/${id}`, formData, {
         headers: {
           "Content-Type": "application/json",
         },

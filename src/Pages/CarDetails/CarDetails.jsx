@@ -6,6 +6,7 @@ import { Box, Rating, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { CarsContext, ThemeContext } from "../../MainLayout/MainLayout";
+import { AuthContext } from "../../FireBase/AuthProvider";
 
 function CarDetails() {
   const { carID, brandName } = useParams();
@@ -18,6 +19,7 @@ function CarDetails() {
     setitemOnCartData,
     itemOnCartData,
   } = useContext(CarsContext);
+  const { user, logOut } = useContext(AuthContext);
 
   // const filteredData = carsData.find((car) => car._id === carID);
   // console.log(filteredData);
@@ -25,9 +27,7 @@ function CarDetails() {
   useEffect(() => {
     const fetchCarsData = async () => {
       try {
-        const response = await axios.get(
-          `https://car-web-server-three.vercel.app/cars/${carID}`
-        );
+        const response = await axios.get(`http://localhost:5000/cars/${carID}`);
         setCarsData(response.data);
         console.log(response.data);
       } catch (error) {
@@ -46,7 +46,7 @@ function CarDetails() {
       once: true,
     });
   }, []);
-
+  const currentUserId = user.providerData[0].uid;
   const itemToCart = {
     brand: carsData?.brand,
     image: carsData?.image,
@@ -55,11 +55,12 @@ function CarDetails() {
     ratingvalue: carsData?.ratingvalue,
     shortDescription: carsData?.shortDescription,
     type: carsData?.type,
+    currentUserId: currentUserId,
   };
 
   const handleAddToCart = () => {
     axios
-      .post("https://car-web-server-three.vercel.app/itemOnCart", itemToCart, {
+      .post("http://localhost:5000/itemOnCart", itemToCart, {
         headers: {
           "Content-Type": "application/json",
         },

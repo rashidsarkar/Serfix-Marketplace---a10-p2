@@ -3,12 +3,17 @@ import { Paper, Typography, Button, Rating, Box } from "@mui/material";
 import { CarsContext, ThemeContext } from "../../MainLayout/MainLayout";
 import swal from "sweetalert";
 import axios from "axios";
+import { AuthContext } from "../../FireBase/AuthProvider";
 // import { ThemeContext } from "@emotion/react";
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item, handleDelete }) => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const currentUserId = user?.providerData[0]?.uid;
   const { fetchCarsData, fetchItemOnCartData, itemOnCartData } =
     useContext(CarsContext);
   const [carsData, setCarsData] = useState([]);
+  // console.log(item);
 
   const {
     image,
@@ -19,9 +24,9 @@ const ItemCard = ({ item }) => {
     shortDescription,
     _id,
     ratingvalue,
-  } = carsData;
+  } = item;
   // console.log(carsData);
-  // https://car-web-server-three.vercel.app/itemOnCart
+  // http://localhost:5000/itemOnCart
   // console.log(typeof +_id);
 
   // const { brandName } = useParams();
@@ -33,7 +38,7 @@ const ItemCard = ({ item }) => {
     const fetchCarsData = async () => {
       try {
         const response = await axios.get(
-          `https://car-web-server-three.vercel.app/itemOnCart/${item._id}`
+          `http://localhost:5000/itemOnCart/107944353138273121977`
         );
         setCarsData(response.data);
         // console.log(response.data);
@@ -45,38 +50,11 @@ const ItemCard = ({ item }) => {
     fetchCarsData(); // Call the function
 
     // Add fetchCarsData to the dependency array
-  }, [item._id]);
-  const myRateingFomDB = carsData?.ratingvalue;
+  }, [itemOnCartData]);
+  console.log(carsData);
+  const myRateingFomDB = item?.ratingvalue;
   // console.log(myRateingFomDB);
-  const handleDelete = (itemId) => {
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this Car!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((res) => {
-      if (res) {
-        axios
-          .delete(
-            `https://car-web-server-three.vercel.app/itemOnCart/${itemId}`
-          )
-          .then((res) => {
-            console.log(res.data);
 
-            fetchItemOnCartData();
-
-            swal("Success", "Car deleted successfully!", "success");
-          })
-          .catch((err) => {
-            console.log(err);
-            swal("Error", "An error occurred while deleting the Car.", "error");
-          });
-      } else {
-        swal("Car is safe!");
-      }
-    });
-  };
   const { theme } = useContext(ThemeContext);
   const bgColorStyleCard = {
     backgroundColor: theme === "light" ? "#E5E6E6" : "#15191E",
@@ -122,7 +100,7 @@ const ItemCard = ({ item }) => {
               >
                 Rating
               </p>
-              <Rating name="simple-controlled" value={+carsData?.ratingvalue} />
+              <Rating name="simple-controlled" value={+item?.ratingvalue} />
             </div>
             <p
               style={textColorStyle}
