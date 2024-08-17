@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AboutUs from "../Components/AboutUs/AboutUs";
 import Banar from "../Components/Banar";
 import BrandCards from "../Components/BrandCards/BrandCards";
 import ProductRevew from "../Components/ProductRevew/ProductRevew";
 import PromoBonus from "../Components/PromoBonus/PromoBonus";
 import SectionTitle from "../Components/SectionTitle";
-
+import AOS from "aos";
 function Home() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
   return (
     <div className="min-h-screen">
       <Banar
