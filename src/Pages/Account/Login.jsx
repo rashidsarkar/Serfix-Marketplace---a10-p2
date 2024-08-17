@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SiGoogle } from "react-icons/si";
 import { AuthContext } from "../../FireBase/AuthProvider";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../MainLayout/MainLayout";
 
 function Login() {
   const { loginEmPAss, googleSing, user } = useContext(AuthContext);
   const navigat = useNavigate();
   const preveLocation = useLocation();
+  const { theme } = useContext(ThemeContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,6 +28,7 @@ function Login() {
         swal("Error", error.message, "error");
       });
   };
+
   const handleGoogleSignIn = () => {
     googleSing()
       .then((user) => {
@@ -39,38 +40,40 @@ function Login() {
         console.log(error.message);
       });
   };
-  const { theme, setTheme } = useContext(ThemeContext);
 
   const bgColorStyle = {
     backgroundColor: theme === "light" ? "#cbd5e1" : "#2c2929",
   };
+
   return (
-    <div className="flex items-center justify-center min-h-screen ">
-      <div style={bgColorStyle} className="p-8  rounded-lg shadow-md w-96">
+    <div className="flex items-center justify-center min-h-screen">
+      <div style={bgColorStyle} className="p-8 rounded-lg shadow-md w-96">
         <h2 className="text-3xl font-semibold text-center mb-4 text-[#FF444A]">
           Login
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium ">
+            <label htmlFor="email" className="block text-sm font-medium">
               Email
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              defaultValue="haterjob@akagiliving.com" // Set your default email here
               className="mt-1 p-3 block w-full rounded-md bg-gray-700 text-gray-300 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
               required
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium ">
+            <label htmlFor="password" className="block text-sm font-medium">
               Password
             </label>
             <input
               type="password"
               id="password"
               name="password"
+              defaultValue="Zx@123456" // Set your default password here
               className="mt-1 p-3 block w-full rounded-md bg-gray-700 text-gray-300 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
               required
             />
@@ -82,8 +85,8 @@ function Login() {
             Login
           </button>
         </form>
-        <p className="mt-4 text-center ">
-          <span className="text-sm ">or</span>
+        <p className="mt-4 text-center">
+          <span className="text-sm">or</span>
         </p>
         <button
           onClick={handleGoogleSignIn}
@@ -92,7 +95,7 @@ function Login() {
           <SiGoogle className="w-6 h-6 mr-2" />
           Sign In with Google
         </button>
-        <p className="mt-4 text-center ">
+        <p className="mt-4 text-center">
           Don't have an account?{" "}
           <Link to="/signup" className="text-[#FF444A] hover:underline">
             Sign Up
